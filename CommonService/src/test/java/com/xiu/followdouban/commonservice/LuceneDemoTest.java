@@ -235,6 +235,7 @@ public class LuceneDemoTest {
             //文件索引存放路径
             Directory directory = FSDirectory.open(Paths.get(indexDir));
             //分词器
+
             IKAnalyzer analyzer = new IKAnalyzer();
             //StandardAnalyzer analyzer = new StandardAnalyzer();
             IndexWriterConfig config = new IndexWriterConfig(analyzer);
