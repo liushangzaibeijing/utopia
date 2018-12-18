@@ -126,28 +126,19 @@
 			<version>2.8.5</version>
 		</dependency>
 
-
-		<!-- https://mvnrepository.com/artifact/com.janeluo/ikanalyzer
-		<dependency>
-			<groupId>com.janeluo</groupId>
-			<artifactId>ikanalyzer</artifactId>
-			<version>2012_u6</version>
-		</dependency>
-         -->
-
-		<!--
 		<dependency>
 			<groupId>com.chulung</groupId>
 			<artifactId>IK-Analyzer</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-         -->
 
+		<!--
 		<dependency>
 			<groupId>com.xiu</groupId>
 			<artifactId>IK_Analyzer</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+        -->
 
 		<!--中文分词器-->
 		<dependency>

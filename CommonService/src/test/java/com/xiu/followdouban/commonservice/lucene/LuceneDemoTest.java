@@ -1,9 +1,10 @@
-package com.xiu.followdouban.commonservice;
+package com.xiu.followdouban.commonservice.lucene;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiu.followdouban.commonrpc.model.Book;
 import com.xiu.followdouban.commonrpc.model.BookExample;
+import com.xiu.followdouban.commonservice.CommonserviceApplication;
 import com.xiu.followdouban.commonservice.mapper.BookMapper;
 import com.xiu.followdouban.commonservice.service.LuceneService;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
@@ -68,10 +69,16 @@ public class LuceneDemoTest {
         Map<String,Float> boots = new HashMap<>(2);
         boots.put("name",1.0F);
         boots.put("author",1.0F);
-        List<Book> books = luceneService.bookSearch("bookIndex","三毛",fields,boots,1);
+        List<Book> books = null;
+        try {
+            books = luceneService.bookSearch("bookIndex","未来简史",fields,boots,1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         log.info("查询结果 ： {}",JsonUtil.gsonString(books));
     }
+
     /**
      * 为所有书籍新创建索引 Document中只包含id,name,author
      */
@@ -81,7 +88,7 @@ public class LuceneDemoTest {
         IndexWriter writer = null;
         try {
             //文件索引存放路径
-            Directory directory = FSDirectory.open(Paths.get("aaa"));
+            Directory directory = FSDirectory.open(Paths.get("bookIndex"));
             //分词器
             IKAnalyzer analyzer = new IKAnalyzer();
             //StandardAnalyzer analyzer = new StandardAnalyzer();
@@ -104,5 +111,4 @@ public class LuceneDemoTest {
             }
         }
     }
-
 }

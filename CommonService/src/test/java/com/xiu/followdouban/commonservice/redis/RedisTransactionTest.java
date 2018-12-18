@@ -1,5 +1,6 @@
-package com.xiu.followdouban.commonservice;
+package com.xiu.followdouban.commonservice.redis;
 
+import com.xiu.followdouban.commonservice.CommonserviceApplication;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

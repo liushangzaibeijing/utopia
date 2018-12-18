@@ -1,6 +1,8 @@
 package com.xiu.followdouban.commonrpc.model;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie extends BaseModel implements Serializable {
     /**
      * 电影主键
      */

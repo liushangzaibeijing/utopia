@@ -1,6 +1,8 @@
 package com.xiu.followdouban.commonrpc.model;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book extends BaseModel implements Serializable{
     /**
      * 主键
      */
