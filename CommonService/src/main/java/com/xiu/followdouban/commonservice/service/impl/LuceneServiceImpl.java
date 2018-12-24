@@ -1,5 +1,6 @@
 package com.xiu.followdouban.commonservice.service.impl;
 
+import com.alibaba.dubbo.common.utils.StringUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiu.followdouban.commonrpc.dto.DescField;
@@ -15,6 +16,7 @@ import com.xiu.followdouban.commonservice.mapper.MovieMapper;
 import com.xiu.followdouban.commonservice.service.LuceneService;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
 import com.xiu.followdouban.commonservice.utils.LuceneUtils;
+import com.xiu.followdouban.commonservice.utils.RedisKeyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
@@ -23,13 +25,12 @@ import org.apache.lucene.index.*;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.search.*;
-import org.apache.lucene.search.spans.SpanQuery;
-import org.apache.lucene.search.spans.SpanTermQuery;
-import org.apache.lucene.search.spans.Spans;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.BytesRef;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
@@ -58,6 +59,12 @@ public class LuceneServiceImpl implements LuceneService {
      * 分词器
      */
     private IKAnalyzer analyzer = new IKAnalyzer();
+
+    /**
+     * 书籍mapper
+     */
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
 
     /**
      * 书籍mapper
@@ -555,13 +562,25 @@ public class LuceneServiceImpl implements LuceneService {
      * @return
      */
     private Book findBookById(Integer id) {
-        BookExample bookExample = new BookExample();
-        bookExample.createCriteria().andIdEqualTo(id);
-        List<Book> books = bookMapper.selectByExample(bookExample);
-        if(books!=null&&books.size()>0){
-            return books.get(0);
-        }
-        return null;
+        //先从redis获取，如果没有则进行数据库的获取
+       Book book = null;
+       //从缓存中获取
+       book = getEntityByCached(id,Book.class);
+       if(book!=null){
+           return  book;
+       }
+       else{
+           BookExample bookExample = new BookExample();
+           bookExample.createCriteria().andIdEqualTo(id);
+           List<Book> books = bookMapper.selectByExample(bookExample);
+           if(books!=null&&books.size()>0){
+               book = books.get(0);
+               //将不存在的数据放入缓存中
+               putRedisCanched(id,book);
+           }
+       }
+
+        return book;
     }
 
     /**
@@ -569,13 +588,23 @@ public class LuceneServiceImpl implements LuceneService {
      * @return
      */
     private Movie findMovieById(Integer id) {
-        MovieExample movieExample = new MovieExample();
-        movieExample.createCriteria().andIdEqualTo(id);
-        List<Movie> movies = movieMapper.selectByExample(movieExample);
-        if(movies!=null&&movies.size()>0){
-            return movies.get(0);
+        Movie movie = null;
+        //从缓存中获取
+        movie = getEntityByCached(id,Movie.class);
+        if(movie!=null){
+            return  movie;
         }
-        return null;
+        else {
+            MovieExample movieExample = new MovieExample();
+            movieExample.createCriteria().andIdEqualTo(id);
+            List<Movie> movies = movieMapper.selectByExample(movieExample);
+            if (movies != null && movies.size() > 0) {
+                movie = movies.get(0);
+                //将不存在的数据放入缓存中
+                putRedisCanched(id,movie);
+            }
+        }
+        return movie;
     }
 
     /**
@@ -594,5 +623,28 @@ public class LuceneServiceImpl implements LuceneService {
             page = (Page<Movie>)movies;
         }
         return  page.getTotal();
+    }
+
+
+    //从Redis缓存中获取实体对象
+     private <T> T getEntityByCached(Integer id,Class<T> clazz) {
+         String key = RedisKeyUtils.generatorKey(id, clazz);
+
+         ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+         String value = valueOperations.get(key);
+         if (StringUtils.isNotEmpty(value)) {
+             T entity = JsonUtil.gsonToBean(value, clazz);
+             return entity;
+         }
+         return null;
+     }
+
+
+    //不存在的Redis对应的实体，则将改数据信息添加到redis中
+    private <T> void putRedisCanched(Integer id,T entity) {
+        String key = RedisKeyUtils.generatorKey(id, entity.getClass());
+
+        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(key, JsonUtil.gsonString(entity));
     }
 }

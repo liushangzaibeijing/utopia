@@ -89,7 +89,7 @@ public class LuceneQueryTest {
     @Test
     public void testTermRangeQuery(){
         String fieldName = "name";
-        String start = "简史";
+        String start = "战绩";
         String end ="三毛";
 
         List<Book> books = luceneService.bookSearch(fieldName,start,end,true,true,1);

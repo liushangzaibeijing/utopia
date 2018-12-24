@@ -1,7 +1,9 @@
 package com.xiu.followdouban.commonservice.redis;
 
+import com.xiu.followdouban.commonrpc.model.Book;
 import com.xiu.followdouban.commonservice.CommonserviceApplication;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
+import com.xiu.followdouban.commonservice.utils.RedisKeyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -518,4 +520,9 @@ public class RedisDemoTest {
         log.info("获取hash中所有的key:{}",JsonUtil.gsonString(values));
     }
 
+    @Test
+    public void testRedis(){
+        String redis = RedisKeyUtils.generatorKey(1, Book.class);
+        log.info("redis key : {}",redis);
+    }
 }
