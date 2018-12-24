@@ -23,7 +23,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-/log
+/log/
 
 /.idea/
 mvnw
