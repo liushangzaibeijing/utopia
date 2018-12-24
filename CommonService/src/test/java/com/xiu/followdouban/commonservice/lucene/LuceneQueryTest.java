@@ -1,12 +1,11 @@
 package com.xiu.followdouban.commonservice.lucene;
 
 import com.xiu.followdouban.commonrpc.dto.MatchId;
-import com.xiu.followdouban.commonrpc.enums.IdType;
 import com.xiu.followdouban.commonrpc.model.Book;
 import com.xiu.followdouban.commonrpc.model.BookExample;
 import com.xiu.followdouban.commonservice.CommonserviceApplication;
 import com.xiu.followdouban.commonservice.mapper.BookMapper;
-import com.xiu.followdouban.commonservice.service.LuceneService;
+import com.xiu.followdouban.commonrpc.service.LuceneService;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.index.Term;
@@ -20,7 +19,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -136,11 +134,11 @@ public class LuceneQueryTest {
         String keyWord = "java";
 
         Query preFixQuery = new PrefixQuery(new Term(fieldName,keyWord));
-        for(int i = 1;i<=12;i++){
-            List<Book> bookArray = luceneService.bookSearch(preFixQuery,i);
+        //for(int i = 1;i<=12;i++){
+            List<Book> bookArray = luceneService.bookSearch(preFixQuery,1);
             log.info("查询出来的书籍信息为：{}",JsonUtil.gsonString(books));
             books.addAll(bookArray);
-        }
+        //}
 
         //获取对应的sql查询
         BookExample bookExample = new BookExample();

@@ -7,8 +7,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -25,8 +23,32 @@ public class TimeCostAspect {
     public void timecostAnonation() {
     }
 
+    /**
+     * 注解形式的AOP使用
+     * @param pjp
+     * @return
+     * @throws Throwable
+     */
     @Around("timecostAnonation()")
     public Object aroundAnnotation(ProceedingJoinPoint pjp) throws Throwable {
+        return invokeHandler(pjp);
+    }
+
+
+    /**
+     * 使用范围相关的aop execution 表达式实现
+     */
+    //后期 切入点 可以为指定的注解（比如时间花费注解，日志注解等）
+    @Pointcut("execution(public * com.xiu.followdouban.commonservice.service.impl..*.*(..))")
+    public void timecostAnonationAll() {
+    }
+
+    @Around("timecostAnonationAll()")
+    public Object aroundAnnotationAll(ProceedingJoinPoint pjp) throws Throwable {
+        return invokeHandler(pjp);
+    }
+
+    private Object invokeHandler(ProceedingJoinPoint pjp) throws Throwable {
         long startTime = System.currentTimeMillis();
 
         Object o;

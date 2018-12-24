@@ -1,17 +1,14 @@
-package com.xiu.followdouban.commonservice.service;
+package com.xiu.followdouban.commonrpc.service;
 
 import com.xiu.followdouban.commonrpc.dto.MatchId;
 import com.xiu.followdouban.commonrpc.model.Book;
 import com.xiu.followdouban.commonrpc.model.BookExample;
 import com.xiu.followdouban.commonrpc.model.Movie;
 import com.xiu.followdouban.commonrpc.model.MovieExample;
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.spans.SpanQuery;
-import org.apache.lucene.search.spans.SpanTermQuery;
 
-import java.util.ArrayList;
+import org.apache.lucene.search.Query;
+import org.springframework.expression.ParseException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +38,7 @@ public interface LuceneService {
      * @param pageNum
      * @return
      */
-    List<Book> bookSearch(String indexDir, String keyword, String[] fields, Map<String, Float> boosts, Integer pageNum) throws ParseException;
+    List<Book> bookSearch(String indexDir, String keyword, String[] fields, Map<String, Float> boosts, Integer pageNum) ;
 
     /**
      * TermQuery搜索文档的最小单位

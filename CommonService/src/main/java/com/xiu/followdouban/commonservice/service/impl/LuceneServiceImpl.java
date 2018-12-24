@@ -13,7 +13,7 @@ import com.xiu.followdouban.commonrpc.model.Movie;
 import com.xiu.followdouban.commonrpc.model.MovieExample;
 import com.xiu.followdouban.commonservice.mapper.BookMapper;
 import com.xiu.followdouban.commonservice.mapper.MovieMapper;
-import com.xiu.followdouban.commonservice.service.LuceneService;
+import com.xiu.followdouban.commonrpc.service.LuceneService;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
 import com.xiu.followdouban.commonservice.utils.LuceneUtils;
 import com.xiu.followdouban.commonservice.utils.RedisKeyUtils;
@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
 @Service
 public class LuceneServiceImpl implements LuceneService {
     private final Integer pageSize = 20;
@@ -117,13 +118,19 @@ public class LuceneServiceImpl implements LuceneService {
      * @param pageNum 当前页码
      * @return 搜索出来的书籍信息
      */
+
     @Override
-    public List<Book> bookSearch(String indexDir,String keyword,String[] fields,Map<String,Float> boosts,Integer pageNum) throws ParseException {
+    public List<Book> bookSearch(String indexDir,String keyword,String[] fields,Map<String,Float> boosts,Integer pageNum){
         List<Book> books = new ArrayList<>();
 
         //TODO 是否需要使用多域名查询
         MultiFieldQueryParser multiFieldQueryParser = new MultiFieldQueryParser(fields,analyzer,boosts);
-        Query query = multiFieldQueryParser.parse(keyword);
+        Query query = null;
+        try {
+            query = multiFieldQueryParser.parse(keyword);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         List<Document> documents = getDocumentList(indexDir,analyzer,query,pageNum);
         for(Document document:documents){
@@ -191,6 +198,7 @@ public class LuceneServiceImpl implements LuceneService {
      * @param pageNum
      * @return
      */
+
     @Override
     public List<Book> bookSearch(Query query, Integer pageNum) {
         List<Book> books = new ArrayList<>();
@@ -273,12 +281,17 @@ public class LuceneServiceImpl implements LuceneService {
      * @return 根据搜索条件查询到的电影信息
      */
     @Override
-    public List<Movie> movieSearch(String indexDir,String keyword,String[] fields,Map<String,Float> boosts,Integer pageNum) throws ParseException {
+    public List<Movie> movieSearch(String indexDir,String keyword,String[] fields,Map<String,Float> boosts,Integer pageNum)  {
         List<Movie> movies = new ArrayList<>();
 
         //TODO 是否需要使用多域名查询
         MultiFieldQueryParser multiFieldQueryParser = new MultiFieldQueryParser(fields,analyzer,boosts);
-        Query query = multiFieldQueryParser.parse(keyword);
+        Query query = null;
+        try {
+            query = multiFieldQueryParser.parse(keyword);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         List<Document> documents = getDocumentList(indexDir,analyzer, query, pageNum);
         for(Document document:documents){

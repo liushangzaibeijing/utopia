@@ -2,8 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/CommonRpc" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/CommonService" vcs="svn" />
-    <mapping directory="$PROJECT_DIR$/CommonWebApi" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/CommonRpc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/CommonService" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/CommonWebApi" vcs="Git" />
   </component>
 </project>

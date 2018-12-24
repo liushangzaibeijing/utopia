@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * createTime  2018/7/20
  * desc 记录花费时间注解
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ElementType.TYPE,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TimeCostAnnotation {
     String value() default "";

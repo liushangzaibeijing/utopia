@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<lucene.version>7.4.0</lucene.version>
+		<dubbo-spring-boot>1.0.0</dubbo-spring-boot>
 	</properties>
 
 	<dependencies>
@@ -36,8 +38,80 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>io.dubbo.springboot</groupId>
+			<artifactId>spring-boot-starter-dubbo</artifactId>
+			<version>${dubbo-spring-boot}</version>
+		</dependency>
 
-			<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <!--核心包-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <!--一般分词器，适用于英文分词-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+
+        <!-- IK分词器 https://mvnrepository.com/artifact/com.janeluo/ikanalyzer
+		<dependency>
+			<groupId>com.xiu</groupId>
+			<artifactId>analyzer</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+        <dependency>
+            <groupId>com.chulung</groupId>
+            <artifactId>IK-Analyzer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        -->
+        <!--中文分词器-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-smartcn</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+
+        <!--对分词索引查询解析-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+        <!--检索关键字高亮显示-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-highlighter</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.chulung</groupId>
+            <artifactId>IK-Analyzer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>com.xiu</groupId>
+            <artifactId>IK_Analyzer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        -->
+
+        <!--中文分词器-->
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-smartcn</artifactId>
+            <version>${lucene.version}</version>
+        </dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>

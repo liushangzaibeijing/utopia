@@ -29,7 +29,7 @@
 		　　<maxFileSize>5000MB</maxFileSize>
 		</triggeringPolicy>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.dir}/crawling.%d{yyyy-MM-dd}.log
+			<fileNamePattern>${log.dir}/utopia.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>

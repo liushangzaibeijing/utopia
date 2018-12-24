@@ -1,23 +1,15 @@
 package com.xiu.followdouban.commonservice.lucene;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.xiu.followdouban.commonrpc.model.Book;
-import com.xiu.followdouban.commonrpc.model.BookExample;
 import com.xiu.followdouban.commonservice.CommonserviceApplication;
-import com.xiu.followdouban.commonservice.mapper.BookMapper;
-import com.xiu.followdouban.commonservice.service.LuceneService;
+import com.xiu.followdouban.commonrpc.service.LuceneService;
 import com.xiu.followdouban.commonservice.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
-import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.*;
-import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.search.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.junit.Test;
@@ -30,7 +22,6 @@ import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,11 +61,7 @@ public class LuceneDemoTest {
         boots.put("name",1.0F);
         boots.put("author",1.0F);
         List<Book> books = null;
-        try {
-            books = luceneService.bookSearch("bookIndex","未来简史",fields,boots,1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        books = luceneService.bookSearch("bookIndex","未来简史",fields,boots,1);
 
         log.info("查询结果 ： {}",JsonUtil.gsonString(books));
     }
