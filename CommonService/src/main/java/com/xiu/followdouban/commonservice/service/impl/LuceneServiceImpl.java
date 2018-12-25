@@ -1,6 +1,7 @@
 package com.xiu.followdouban.commonservice.service.impl;
 
 import com.alibaba.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiu.followdouban.commonrpc.dto.DescField;
@@ -31,7 +32,7 @@ import org.apache.lucene.util.BytesRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 import java.io.IOException;
@@ -41,8 +42,8 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
-@Service
+@Service(version = "1.0.0")
+@Component
 public class LuceneServiceImpl implements LuceneService {
     private final Integer pageSize = 20;
 
