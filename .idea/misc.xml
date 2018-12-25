@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/CommonService/pom.xml" />
         <option value="$PROJECT_DIR$/CommonWebApi/pom.xml" />
         <option value="$PROJECT_DIR$/CommonServiceProvider/pom.xml" />
+        <option value="$PROJECT_DIR$/parent/pom.xml" />
       </list>
     </option>
   </component>
