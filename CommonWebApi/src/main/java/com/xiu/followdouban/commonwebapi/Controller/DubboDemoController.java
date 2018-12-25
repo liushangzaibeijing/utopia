@@ -19,7 +19,7 @@ public class DubboDemoController {
             version = "1.0.0",
             url = "dubbo://localhost:12345")
     */
-    @Reference
+    @Reference(version = "1.0.0")
     private DubboDemoService dubboDemoService;
 
     @RequestMapping("/dubbo/{keyword}")
