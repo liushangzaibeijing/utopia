@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class MovieController {
 
-    @Reference
+    @Reference(version = "1.0.0")
     private LuceneService luceneService;
 
     @RequestMapping("/test/{keyword}")
