@@ -14,6 +14,11 @@ import java.util.List;
 @RestController
 public class DubboDemoController {
 
+    /*
+    @Reference(
+            version = "1.0.0",
+            url = "dubbo://localhost:12345")
+    */
     @Reference
     private DubboDemoService dubboDemoService;
 

@@ -2,10 +2,13 @@ package com.xiu.followdouban.commonservice.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.xiu.followdouban.commonrpc.service.DubboDemoService;
-import org.springframework.stereotype.Component;
 
-@Service
-@Component
+
+@Service(
+        version = "${demo.service.version}",
+        protocol = {"dubbo", "rest"},
+        registry = "${dubbo.registry.id}"
+)
 public class DubboDemoServiceImpl implements DubboDemoService {
     @Override
     public String dubboTest(String keyword) {
