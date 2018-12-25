@@ -12,11 +12,7 @@ public class CommonserviceApplication {
 
 	public static void main(String[] args) {
 
-		//SpringApplication.run(CommonserviceApplication.class, args);
-
-		new SpringApplicationBuilder(CommonserviceApplication.class)
-				.web(WebApplicationType.NONE)
-				.run(args);
+		SpringApplication.run(CommonserviceApplication.class, args);
 
 	}
 }

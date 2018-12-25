@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service(version = "1.0.0")
+@Service(version = "1.0.0",interfaceClass = LuceneService.class)
 @Component
 public class LuceneServiceImpl implements LuceneService {
     private final Integer pageSize = 20;

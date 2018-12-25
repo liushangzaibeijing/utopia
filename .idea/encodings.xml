@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/CommonRpc" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonService" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonServiceProvider" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonWebApi" charset="UTF-8" />
   </component>
 </project>
