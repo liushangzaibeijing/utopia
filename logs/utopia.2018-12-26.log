@@ -1,9 +1,0 @@
-2018-12-26.12:10:40 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStarting:50  Starting CommonServiceProviderApplication on PC-20181122BOIG with PID 25104 (D:\workspace\douban\utopia\CommonServiceProvider\target\classes started by Administrator in D:\workspace\douban\utopia)
-2018-12-26.12:10:40 DEBUG [main] c.x.f.c.CommonServiceProviderApplication.logStarting:53  Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
-2018-12-26.12:10:40 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStartupProfileInfo:680  No active profile set, falling back to default profiles: default
-2018-12-26.12:12:58 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStarting:50  Starting CommonServiceProviderApplication on PC-20181122BOIG with PID 27680 (D:\workspace\douban\utopia\CommonServiceProvider\target\classes started by Administrator in D:\workspace\douban\utopia)
-2018-12-26.12:12:58 DEBUG [main] c.x.f.c.CommonServiceProviderApplication.logStarting:53  Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
-2018-12-26.12:12:58 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStartupProfileInfo:680  No active profile set, falling back to default profiles: default
-2018-12-26.12:13:13 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStarting:50  Starting CommonServiceProviderApplication on PC-20181122BOIG with PID 18332 (D:\workspace\douban\utopia\CommonServiceProvider\target\classes started by Administrator in D:\workspace\douban\utopia)
-2018-12-26.12:13:13 DEBUG [main] c.x.f.c.CommonServiceProviderApplication.logStarting:53  Running with Spring Boot v2.0.5.RELEASE, Spring v5.0.9.RELEASE
-2018-12-26.12:13:13 INFO  [main] c.x.f.c.CommonServiceProviderApplication.logStartupProfileInfo:680  No active profile set, falling back to default profiles: default
