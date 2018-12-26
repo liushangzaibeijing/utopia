@@ -20,19 +20,14 @@ public class MovieController {
     private LuceneService luceneService;
 
     @RequestMapping("/test/{keyword}")
-    public Boolean searchBook(@PathVariable("keyword") String keyword){
+    public List<Book> searchBook(@PathVariable("keyword") String keyword){
         if(StringUtils.isBlank(keyword)){
                System.out.println("the keyword is null");
         }
 
-        String fieldName = "score";
-        Long start = 8L;
-        Long end = 9L;
+        List<Book> books = luceneService.bookSearch(keyword,"name",5);
 
-        boolean success = luceneService.bookIndexInit();
-        //List<Book> books = luceneService.bookSearch(keyword,"name",1);
-
-        return success;
+        return books;
 
     }
 }
