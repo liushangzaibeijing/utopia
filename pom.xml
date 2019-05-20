@@ -14,9 +14,9 @@
         <dubbo-spring-boot>1.0.0</dubbo-spring-boot>
     </properties>
     <modules>
-        <module>commonrpc</module>
-        <module>commonserviceProvider</module>
-        <module>commonwebapi</module>
+        <module>rpc</module>
+        <module>serviceProvider</module>
+        <module>protal</module>
     </modules>
 
 
