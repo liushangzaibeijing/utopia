@@ -2,6 +2,7 @@ package com.xiu.utopia.dao;
 
 import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
+import com.xiu.utopia.vo.MovieVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

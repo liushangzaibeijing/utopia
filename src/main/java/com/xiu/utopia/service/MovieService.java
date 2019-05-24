@@ -1,0 +1,19 @@
+package com.xiu.utopia.service;
+
+import com.github.pagehelper.Page;
+import com.xiu.utopia.entity.Movie;
+import com.xiu.utopia.entity.MovieExample;
+import com.xiu.utopia.vo.MovieVo;
+
+import java.util.List;
+
+public interface MovieService {
+
+
+    /**
+     * 根据查询条件查询对应的电影列表
+     * @param movieExample
+     * @return
+     */
+    Page<MovieVo> queryMovieListWithPage(MovieExample movieExample, Integer pageNum, Integer pageSize);
+}

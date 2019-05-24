@@ -5,6 +5,7 @@
 <configuration>
     <typeAliases>
         <package name="com.xiu.utopia.entity"/>
+        <package name="com.xiu.utopia.vo"/>
     </typeAliases>
 
 </configuration>
