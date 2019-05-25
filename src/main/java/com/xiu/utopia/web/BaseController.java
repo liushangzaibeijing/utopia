@@ -2,6 +2,7 @@ package com.xiu.utopia.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.xiu.utopia.utils.JsonUtil;
 import com.xiu.utopia.utils.Util;
 import org.slf4j.Logger;

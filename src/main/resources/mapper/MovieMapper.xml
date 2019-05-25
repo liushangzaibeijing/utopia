@@ -25,8 +25,7 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="movie">
     <result column="synopsis" jdbcType="LONGVARCHAR" property="synopsis" />
   </resultMap>
-  <!--<resultMap id="BaseExtendMap" type="movieVo" extends="ResultMapWithBLOBs">-->
-  <!--</resultMap>-->
+
 
   <sql id="Example_Where_Clause">
     <where>
@@ -387,4 +386,43 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+
+
+  <!-- 手动编写的sql -->
+  <resultMap id="BaseExtendMapWithBLOBs" type="movieVo" extends="ResultMapWithBLOBs">
+  </resultMap>
+
+  <resultMap id="BaseExtendMap" type="movieVo" extends="BaseResultMap">
+  </resultMap>
+  <select id="selectVoByExampleWithBLOBs" parameterType="movieExample" resultMap="BaseExtendMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectVoByExample" parameterType="movieExample" resultMap="BaseExtendMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

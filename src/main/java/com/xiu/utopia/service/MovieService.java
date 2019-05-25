@@ -1,6 +1,7 @@
 package com.xiu.utopia.service;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.vo.MovieVo;

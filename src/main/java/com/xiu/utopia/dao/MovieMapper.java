@@ -21,6 +21,11 @@ public interface MovieMapper {
 
     List<Movie> selectByExample(MovieExample example);
 
+    List<MovieVo> selectVoByExampleWithBLOBs(MovieExample example);
+
+    List<MovieVo> selectVoByExample(MovieExample example);
+
+
     int updateByExampleSelective(@Param("record") Movie record, @Param("example") MovieExample example);
 
     int updateByExampleWithBLOBs(@Param("record") Movie record, @Param("example") MovieExample example);
