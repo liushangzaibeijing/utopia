@@ -3,8 +3,11 @@ package com.xiu.utopia.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.xiu.utopia.common.Constants;
 import com.xiu.utopia.dao.MovieMapper;
+import com.xiu.utopia.entity.Actor;
+import com.xiu.utopia.entity.Director;
 import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.service.MovieService;
@@ -57,5 +60,56 @@ public class MovieServiceImpl implements MovieService {
             }
         }
         return movieVos;
+    }
+
+    @Override
+    public MovieVo queryMoviebyId(Integer id) {
+
+        MovieExample movieExample = new MovieExample();
+        movieExample.createCriteria().andIdEqualTo(id);
+        List<Movie> movies =  movieMapper.selectByExampleWithBLOBs(movieExample);
+
+        if(movies==null && movies.size()==0){
+            return null;
+        }
+
+        MovieVo movieVo = new MovieVo();
+        BeanUtils.copyProperties(movies.get(0),movieVo);
+        String shortName = movieVo.getName();
+        if(shortName.length()>= Constants.MAX_SHORT_NAME){
+            movieVo.setShortName(shortName.substring(0,7)+"...");
+        }else{
+            movieVo.setShortName(shortName);
+        }
+
+        //添加导演
+        String[] directorsStr = movieVo.getDirector().split("/");
+
+        List<Director> directors = Lists.newArrayList();
+        for(int i = 0;i<directorsStr.length;i++){
+            Director director = new Director();
+            director.setDirector(true);
+            director.setId(i+1);
+            director.setName(directorsStr[i]);
+            director.setAvatars(movieVo.getPicture());
+            directors.add(director);
+        }
+
+        movieVo.setDirectors(directors);
+        //{id:'1',avatars:"./avatar.jpg",name:'贾斯丁比伯'}
+        //添加导演信息 directors  leadActors
+        //添加演员
+        List<Actor> actors = Lists.newArrayList();
+        String[] actorsStr = movieVo.getLeadActor().split("/");
+        for(int i = 0;i<actorsStr.length;i++){
+            Actor actor = new Actor();
+            actor.setDirector(false);
+            actor.setId(i+1);
+            actor.setName(actorsStr[i]);
+            actor.setAvatars(movieVo.getPicture());
+            actors.add(actor);
+        }
+        movieVo.setLeadActors(actors);
+        return movieVo;
     }
 }

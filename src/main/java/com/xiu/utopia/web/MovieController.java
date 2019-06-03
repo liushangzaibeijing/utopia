@@ -25,6 +25,7 @@ public class MovieController extends BaseController {
     MovieService movieService;
 
 
+
     @RequestMapping("/movieListPage")
     //public String getMoviePage(Integer pageNum,Integer pageSize){
         public String getMoviePage(@RequestBody  Map param){
@@ -39,4 +40,14 @@ public class MovieController extends BaseController {
         return success(pageTotal(moviePage));
     }
 
+
+    @RequestMapping("/movieDetail")
+    //public String getMoviePage(Integer pageNum,Integer pageSize){
+    public String getMovieDetail(@RequestBody  Integer id){
+       logger.info("查询电影详情开始");
+        MovieVo movieVo =movieService.queryMoviebyId(id);
+
+        logger.info("查询出来的id 为{}电影信息为：{}",id,JsonUtil.obj2str(movieVo));
+        return success(JsonUtil.obj2str(movieVo));
+    }
 }

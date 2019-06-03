@@ -1,6 +1,10 @@
 package com.xiu.utopia.vo;
 
+import com.xiu.utopia.entity.Director;
+import com.xiu.utopia.entity.Actor;
 import com.xiu.utopia.entity.Movie;
+
+import java.util.List;
 
 public class MovieVo extends Movie{
 
@@ -13,6 +17,17 @@ public class MovieVo extends Movie{
      * 电影简介 指定字符内
      */
     private String shortSynopsis;
+
+    /**
+     * 导演
+     */
+    private List<Director> directors;
+
+
+    /**
+     * 主要演员
+     */
+    private List<Actor> leadActors;
 
 
     public String getShortName() {
@@ -29,5 +44,21 @@ public class MovieVo extends Movie{
 
     public void setShortSynopsis(String shortSynopsis) {
         this.shortSynopsis = shortSynopsis;
+    }
+
+    public List<Actor> getLeadActors() {
+        return leadActors;
+    }
+
+    public List<Director> getDirectors() {
+        return directors;
+    }
+
+    public void setDirectors(List<Director> directors) {
+        this.directors = directors;
+    }
+
+    public void setLeadActors(List<Actor> leadActors) {
+        this.leadActors = leadActors;
     }
 }

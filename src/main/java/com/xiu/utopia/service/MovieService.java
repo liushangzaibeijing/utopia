@@ -17,4 +17,11 @@ public interface MovieService {
      * @return
      */
     Page<MovieVo> queryMovieListWithPage(MovieExample movieExample, Integer pageNum, Integer pageSize);
+
+    /**
+     * 根据主键查询电影信息
+     * @param id 主键
+     * @return
+     */
+    MovieVo queryMoviebyId(Integer id);
 }
