@@ -1,4 +1,4 @@
-package com.xiu.followdouban.commonrpc.enums;
+package com.xiu.utopia.common.enums;
 
 public enum IdType {
     SQL(1,"sql"),

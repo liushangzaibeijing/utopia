@@ -2,16 +2,15 @@ package com.xiu.utopia.dao;
 
 import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
-import com.xiu.utopia.vo.MovieVo;
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-@Mapper
 public interface MovieMapper {
-    long countByExample(MovieExample example);
+    int countByExample(MovieExample example);
 
     int deleteByExample(MovieExample example);
+
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Movie record);
 
@@ -21,14 +20,17 @@ public interface MovieMapper {
 
     List<Movie> selectByExample(MovieExample example);
 
-    List<MovieVo> selectVoByExampleWithBLOBs(MovieExample example);
-
-    List<MovieVo> selectVoByExample(MovieExample example);
-
+    Movie selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Movie record, @Param("example") MovieExample example);
 
     int updateByExampleWithBLOBs(@Param("record") Movie record, @Param("example") MovieExample example);
 
     int updateByExample(@Param("record") Movie record, @Param("example") MovieExample example);
+
+    int updateByPrimaryKeySelective(Movie record);
+
+    int updateByPrimaryKeyWithBLOBs(Movie record);
+
+    int updateByPrimaryKey(Movie record);
 }

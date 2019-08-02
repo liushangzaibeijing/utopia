@@ -1,6 +1,7 @@
 package com.xiu.utopia.dto;
 
-import com.xiu.followdouban.commonrpc.enums.IdType;
+
+import com.xiu.utopia.common.enums.IdType;
 
 import java.util.Objects;
 

@@ -1,102 +1,44 @@
 package com.xiu.utopia.entity;
 
-import java.io.Serializable;
+import com.xiu.utopia.base.BaseModel;
 
-public class Movie extends BaseModel implements Serializable {
-    /**
-     * 电影主键
-     */
+public class Movie extends BaseModel {
     private Integer id;
 
-    /**
-     * 电影名 200
-     */
     private String name;
 
-    /**
-     * 导演
-     */
     private String director;
 
-    /**
-     * 制片
-     */
     private String screenWriter;
 
-    /**
-     * 主演
-     */
     private String leadActor;
 
-
-    /**
-     * 标签
-     */
     private String tag;
 
-    /**
-     * 电影
-     */
-    private String type;
+    private Integer type;
 
-    /**
-     * 制片国家/地区
-     */
     private String filmmakingArea;
 
-    /**
-     * 语言
-     */
     private String language;
 
-    /**
-     * 上映日期
-     */
     private String releaseTime;
 
-    /**
-     * 片长
-     */
     private String movieLength;
 
-    /**
-     * 别名
-     */
     private String alias;
 
-      /**
-     * 得分
-     */
     private Float score;
 
-    /**
-     * 得分
-     */
-    private String link;
-
-    /**
-     * 评论人数
-     */
     private Integer evaluateNumber;
 
-    /**
-     * 电影图片链接
-     */
     private String picture;
 
-    /**
-     * 集数 （电视剧相关的标签）
-     */
+    private String link;
+
     private Integer setNumber;
 
-    /**
-     * 季数（综艺节目）
-     */
     private Integer quaternaryNumber;
 
-    /**
-     * 内容描述（很多）
-     */
     private String synopsis;
 
     public Integer getId() {
@@ -147,12 +89,12 @@ public class Movie extends BaseModel implements Serializable {
         this.tag = tag == null ? null : tag.trim();
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getFilmmakingArea() {

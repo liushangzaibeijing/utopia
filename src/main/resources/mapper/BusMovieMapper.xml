@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiu.utopia.dao.BusMovieMapper" >
+
+  <resultMap extends="com.xiu.utopia.dao.MovieMapper.BaseResultMap" id="ResultMapWithBLOBs" type="movie">
+    <result column="synopsis" jdbcType="LONGVARCHAR" property="synopsis" />
+  </resultMap>
+
+  <!-- 手动编写的sql -->
+  <resultMap id="BaseExtendMapWithBLOBs" type="movieVo" extends="ResultMapWithBLOBs">
+  </resultMap>
+
+  <resultMap id="BaseExtendMap" type="movieVo" extends="com.xiu.utopia.dao.MovieMapper.BaseResultMap">
+  </resultMap>
+
+
+  <select id="selectVoByExampleWithBLOBs" parameterType="movieExample" resultMap="BaseExtendMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="com.xiu.utopia.dao.MovieMapper.Base_Column_List" />
+    ,
+    <include refid="com.xiu.utopia.dao.MovieMapper.Blob_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="com.xiu.utopia.dao.MovieMapper.Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectVoByExample" parameterType="movieExample" resultMap="BaseExtendMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="com.xiu.utopia.dao.MovieMapper.Base_Column_List" />
+    from movie
+    <if test="_parameter != null">
+      <include refid="com.xiu.utopia.dao.MovieMapper.Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

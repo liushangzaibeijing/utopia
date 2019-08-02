@@ -5,11 +5,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.xiu.utopia.common.Constants;
+import com.xiu.utopia.dao.BusMovieMapper;
 import com.xiu.utopia.dao.MovieMapper;
-import com.xiu.utopia.entity.Actor;
-import com.xiu.utopia.entity.Director;
-import com.xiu.utopia.entity.Movie;
-import com.xiu.utopia.entity.MovieExample;
+import com.xiu.utopia.dao.TagMapper;
+import com.xiu.utopia.entity.*;
 import com.xiu.utopia.service.MovieService;
 import com.xiu.utopia.utils.JsonUtil;
 import com.xiu.utopia.vo.MovieVo;
@@ -34,6 +33,12 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     MovieMapper movieMapper;
 
+    @Autowired
+    BusMovieMapper busMovieMapper;
+
+    @Autowired
+    TagMapper tagMapper;
+
     @Override
     public Page<MovieVo> queryMovieListWithPage(MovieExample movieExample,Integer pageNum,Integer pageSize) {
         if(pageNum == null ){
@@ -44,7 +49,7 @@ public class MovieServiceImpl implements MovieService {
         }
         PageHelper.startPage(pageNum,pageSize);
 
-        Page<MovieVo> movieVos = (Page<MovieVo>) movieMapper.selectVoByExampleWithBLOBs(movieExample);
+        Page<MovieVo> movieVos = (Page<MovieVo>) busMovieMapper.selectVoByExampleWithBLOBs(movieExample);
 
         //对电影名称 电影简介进行截取
         log.info("本次查询出来的电影数量：{}", JsonUtil.obj2str(movieVos));
@@ -53,6 +58,7 @@ public class MovieServiceImpl implements MovieService {
         for(MovieVo movieVo:movieVos){
             String shortName = movieVo.getName();
 
+            movieVo.setTypeName(convertType(movieVo.getType()));
             if(shortName.length()>= Constants.MAX_SHORT_NAME){
                 movieVo.setShortName(shortName.substring(0,7)+"...");
             }else{
@@ -60,6 +66,15 @@ public class MovieServiceImpl implements MovieService {
             }
         }
         return movieVos;
+    }
+
+    /**
+     * 将标签转换为
+     * @param type
+     * @return
+     */
+    private String convertType(Integer type) {
+        return tagMapper.selectByPrimaryKey(type).getName();
     }
 
     @Override

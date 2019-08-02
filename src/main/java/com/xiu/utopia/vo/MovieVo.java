@@ -19,6 +19,11 @@ public class MovieVo extends Movie{
     private String shortSynopsis;
 
     /**
+     * 电影所属标签字符串
+     */
+    private String TypeName;
+
+    /**
      * 导演
      */
     private List<Director> directors;
@@ -44,6 +49,15 @@ public class MovieVo extends Movie{
 
     public void setShortSynopsis(String shortSynopsis) {
         this.shortSynopsis = shortSynopsis;
+    }
+
+
+    public String getTypeName() {
+        return TypeName;
+    }
+
+    public void setTypeName(String typeName) {
+        TypeName = typeName;
     }
 
     public List<Actor> getLeadActors() {

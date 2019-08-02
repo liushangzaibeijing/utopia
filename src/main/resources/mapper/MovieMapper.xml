@@ -1,51 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiu.utopia.dao.MovieMapper">
-  <resultMap id="BaseResultMap" type="movie">
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="director" jdbcType="VARCHAR" property="director" />
-    <result column="screen_writer" jdbcType="VARCHAR" property="screenWriter" />
-    <result column="lead_actor" jdbcType="VARCHAR" property="leadActor" />
-    <result column="tag" jdbcType="VARCHAR" property="tag" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="filmmaking_area" jdbcType="VARCHAR" property="filmmakingArea" />
-    <result column="language" jdbcType="VARCHAR" property="language" />
-    <result column="release_time" jdbcType="VARCHAR" property="releaseTime" />
-    <result column="movie_length" jdbcType="VARCHAR" property="movieLength" />
-    <result column="alias" jdbcType="VARCHAR" property="alias" />
-    <result column="score" jdbcType="REAL" property="score" />
-    <result column="evaluate_number" jdbcType="INTEGER" property="evaluateNumber" />
-    <result column="picture" jdbcType="VARCHAR" property="picture" />
-    <result column="link" jdbcType="VARCHAR" property="link" />
-    <result column="set_number" jdbcType="INTEGER" property="setNumber" />
-    <result column="quaternary_number" jdbcType="INTEGER" property="quaternaryNumber" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.MovieMapper" >
+  <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Movie" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="director" property="director" jdbcType="VARCHAR" />
+    <result column="screen_writer" property="screenWriter" jdbcType="VARCHAR" />
+    <result column="lead_actor" property="leadActor" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="filmmaking_area" property="filmmakingArea" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="release_time" property="releaseTime" jdbcType="VARCHAR" />
+    <result column="movie_length" property="movieLength" jdbcType="VARCHAR" />
+    <result column="alias" property="alias" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="REAL" />
+    <result column="evaluate_number" property="evaluateNumber" jdbcType="INTEGER" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="set_number" property="setNumber" jdbcType="INTEGER" />
+    <result column="quaternary_number" property="quaternaryNumber" jdbcType="INTEGER" />
   </resultMap>
-
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="movie">
-    <result column="synopsis" jdbcType="LONGVARCHAR" property="synopsis" />
+  <resultMap id="ResultMapWithBLOBs" type="com.xiu.utopia.entity.Movie" extends="BaseResultMap" >
+    <result column="synopsis" property="synopsis" jdbcType="LONGVARCHAR" />
   </resultMap>
-
-
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -56,25 +53,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -85,259 +82,273 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, name, director, screen_writer, lead_actor, tag, type, filmmaking_area, language, 
     release_time, movie_length, alias, score, evaluate_number, picture, link, set_number, 
     quaternary_number
   </sql>
-  <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List" >
     synopsis
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="movieExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.xiu.utopia.entity.MovieExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
+    'true' as QUERYID,
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from movie
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="movieExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.MovieExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
+    'true' as QUERYID,
     <include refid="Base_Column_List" />
     from movie
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="movieExample">
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from movie
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from movie
-    <if test="_parameter != null">
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiu.utopia.entity.MovieExample" >
+    delete from movie
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="movie">
-    insert into movie (id, name, director, 
-      screen_writer, lead_actor, tag, 
-      type, filmmaking_area, language, 
-      release_time, movie_length, alias, 
-      score, evaluate_number, picture, 
-      link, set_number, quaternary_number, 
-      synopsis)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, 
-      #{screenWriter,jdbcType=VARCHAR}, #{leadActor,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{filmmakingArea,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
-      #{releaseTime,jdbcType=VARCHAR}, #{movieLength,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
-      #{score,jdbcType=REAL}, #{evaluateNumber,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, 
-      #{link,jdbcType=VARCHAR}, #{setNumber,jdbcType=INTEGER}, #{quaternaryNumber,jdbcType=INTEGER}, 
-      #{synopsis,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.xiu.utopia.entity.Movie" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into movie (name, director, screen_writer, 
+      lead_actor, tag, type, 
+      filmmaking_area, language, release_time, 
+      movie_length, alias, score, 
+      evaluate_number, picture, link, 
+      set_number, quaternary_number, synopsis
+      )
+    values (#{name,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR}, #{screenWriter,jdbcType=VARCHAR}, 
+      #{leadActor,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{filmmakingArea,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{releaseTime,jdbcType=VARCHAR}, 
+      #{movieLength,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{score,jdbcType=REAL}, 
+      #{evaluateNumber,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
+      #{setNumber,jdbcType=INTEGER}, #{quaternaryNumber,jdbcType=INTEGER}, #{synopsis,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="movie">
+  <insert id="insertSelective" parameterType="com.xiu.utopia.entity.Movie" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into movie
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
         name,
       </if>
-      <if test="director != null">
+      <if test="director != null" >
         director,
       </if>
-      <if test="screenWriter != null">
+      <if test="screenWriter != null" >
         screen_writer,
       </if>
-      <if test="leadActor != null">
+      <if test="leadActor != null" >
         lead_actor,
       </if>
-      <if test="tag != null">
+      <if test="tag != null" >
         tag,
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type,
       </if>
-      <if test="filmmakingArea != null">
+      <if test="filmmakingArea != null" >
         filmmaking_area,
       </if>
-      <if test="language != null">
+      <if test="language != null" >
         language,
       </if>
-      <if test="releaseTime != null">
+      <if test="releaseTime != null" >
         release_time,
       </if>
-      <if test="movieLength != null">
+      <if test="movieLength != null" >
         movie_length,
       </if>
-      <if test="alias != null">
+      <if test="alias != null" >
         alias,
       </if>
-      <if test="score != null">
+      <if test="score != null" >
         score,
       </if>
-      <if test="evaluateNumber != null">
+      <if test="evaluateNumber != null" >
         evaluate_number,
       </if>
-      <if test="picture != null">
+      <if test="picture != null" >
         picture,
       </if>
-      <if test="link != null">
+      <if test="link != null" >
         link,
       </if>
-      <if test="setNumber != null">
+      <if test="setNumber != null" >
         set_number,
       </if>
-      <if test="quaternaryNumber != null">
+      <if test="quaternaryNumber != null" >
         quaternary_number,
       </if>
-      <if test="synopsis != null">
+      <if test="synopsis != null" >
         synopsis,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="director != null">
+      <if test="director != null" >
         #{director,jdbcType=VARCHAR},
       </if>
-      <if test="screenWriter != null">
+      <if test="screenWriter != null" >
         #{screenWriter,jdbcType=VARCHAR},
       </if>
-      <if test="leadActor != null">
+      <if test="leadActor != null" >
         #{leadActor,jdbcType=VARCHAR},
       </if>
-      <if test="tag != null">
+      <if test="tag != null" >
         #{tag,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
       </if>
-      <if test="filmmakingArea != null">
+      <if test="filmmakingArea != null" >
         #{filmmakingArea,jdbcType=VARCHAR},
       </if>
-      <if test="language != null">
+      <if test="language != null" >
         #{language,jdbcType=VARCHAR},
       </if>
-      <if test="releaseTime != null">
+      <if test="releaseTime != null" >
         #{releaseTime,jdbcType=VARCHAR},
       </if>
-      <if test="movieLength != null">
+      <if test="movieLength != null" >
         #{movieLength,jdbcType=VARCHAR},
       </if>
-      <if test="alias != null">
+      <if test="alias != null" >
         #{alias,jdbcType=VARCHAR},
       </if>
-      <if test="score != null">
+      <if test="score != null" >
         #{score,jdbcType=REAL},
       </if>
-      <if test="evaluateNumber != null">
+      <if test="evaluateNumber != null" >
         #{evaluateNumber,jdbcType=INTEGER},
       </if>
-      <if test="picture != null">
+      <if test="picture != null" >
         #{picture,jdbcType=VARCHAR},
       </if>
-      <if test="link != null">
+      <if test="link != null" >
         #{link,jdbcType=VARCHAR},
       </if>
-      <if test="setNumber != null">
+      <if test="setNumber != null" >
         #{setNumber,jdbcType=INTEGER},
       </if>
-      <if test="quaternaryNumber != null">
+      <if test="quaternaryNumber != null" >
         #{quaternaryNumber,jdbcType=INTEGER},
       </if>
-      <if test="synopsis != null">
+      <if test="synopsis != null" >
         #{synopsis,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="movieExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xiu.utopia.entity.MovieExample" resultType="java.lang.Integer" >
     select count(*) from movie
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update movie
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
+      <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.director != null">
+      <if test="record.director != null" >
         director = #{record.director,jdbcType=VARCHAR},
       </if>
-      <if test="record.screenWriter != null">
+      <if test="record.screenWriter != null" >
         screen_writer = #{record.screenWriter,jdbcType=VARCHAR},
       </if>
-      <if test="record.leadActor != null">
+      <if test="record.leadActor != null" >
         lead_actor = #{record.leadActor,jdbcType=VARCHAR},
       </if>
-      <if test="record.tag != null">
+      <if test="record.tag != null" >
         tag = #{record.tag,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.filmmakingArea != null">
+      <if test="record.filmmakingArea != null" >
         filmmaking_area = #{record.filmmakingArea,jdbcType=VARCHAR},
       </if>
-      <if test="record.language != null">
+      <if test="record.language != null" >
         language = #{record.language,jdbcType=VARCHAR},
       </if>
-      <if test="record.releaseTime != null">
+      <if test="record.releaseTime != null" >
         release_time = #{record.releaseTime,jdbcType=VARCHAR},
       </if>
-      <if test="record.movieLength != null">
+      <if test="record.movieLength != null" >
         movie_length = #{record.movieLength,jdbcType=VARCHAR},
       </if>
-      <if test="record.alias != null">
+      <if test="record.alias != null" >
         alias = #{record.alias,jdbcType=VARCHAR},
       </if>
-      <if test="record.score != null">
+      <if test="record.score != null" >
         score = #{record.score,jdbcType=REAL},
       </if>
-      <if test="record.evaluateNumber != null">
+      <if test="record.evaluateNumber != null" >
         evaluate_number = #{record.evaluateNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.picture != null">
+      <if test="record.picture != null" >
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
-      <if test="record.link != null">
+      <if test="record.link != null" >
         link = #{record.link,jdbcType=VARCHAR},
       </if>
-      <if test="record.setNumber != null">
+      <if test="record.setNumber != null" >
         set_number = #{record.setNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.quaternaryNumber != null">
+      <if test="record.quaternaryNumber != null" >
         quaternary_number = #{record.quaternaryNumber,jdbcType=INTEGER},
       </if>
-      <if test="record.synopsis != null">
+      <if test="record.synopsis != null" >
         synopsis = #{record.synopsis,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
     update movie
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
@@ -345,7 +356,7 @@
       screen_writer = #{record.screenWriter,jdbcType=VARCHAR},
       lead_actor = #{record.leadActor,jdbcType=VARCHAR},
       tag = #{record.tag,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
       filmmaking_area = #{record.filmmakingArea,jdbcType=VARCHAR},
       language = #{record.language,jdbcType=VARCHAR},
       release_time = #{record.releaseTime,jdbcType=VARCHAR},
@@ -358,11 +369,11 @@
       set_number = #{record.setNumber,jdbcType=INTEGER},
       quaternary_number = #{record.quaternaryNumber,jdbcType=INTEGER},
       synopsis = #{record.synopsis,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update movie
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
@@ -370,7 +381,7 @@
       screen_writer = #{record.screenWriter,jdbcType=VARCHAR},
       lead_actor = #{record.leadActor,jdbcType=VARCHAR},
       tag = #{record.tag,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
       filmmaking_area = #{record.filmmakingArea,jdbcType=VARCHAR},
       language = #{record.language,jdbcType=VARCHAR},
       release_time = #{record.releaseTime,jdbcType=VARCHAR},
@@ -382,47 +393,111 @@
       link = #{record.link,jdbcType=VARCHAR},
       set_number = #{record.setNumber,jdbcType=INTEGER},
       quaternary_number = #{record.quaternaryNumber,jdbcType=INTEGER}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-
-
-
-  <!-- 手动编写的sql -->
-  <resultMap id="BaseExtendMapWithBLOBs" type="movieVo" extends="ResultMapWithBLOBs">
-  </resultMap>
-
-  <resultMap id="BaseExtendMap" type="movieVo" extends="BaseResultMap">
-  </resultMap>
-  <select id="selectVoByExampleWithBLOBs" parameterType="movieExample" resultMap="BaseExtendMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectVoByExample" parameterType="movieExample" resultMap="BaseExtendMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiu.utopia.entity.Movie" >
+    update movie
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="director != null" >
+        director = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="screenWriter != null" >
+        screen_writer = #{screenWriter,jdbcType=VARCHAR},
+      </if>
+      <if test="leadActor != null" >
+        lead_actor = #{leadActor,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="filmmakingArea != null" >
+        filmmaking_area = #{filmmakingArea,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseTime != null" >
+        release_time = #{releaseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="movieLength != null" >
+        movie_length = #{movieLength,jdbcType=VARCHAR},
+      </if>
+      <if test="alias != null" >
+        alias = #{alias,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="evaluateNumber != null" >
+        evaluate_number = #{evaluateNumber,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null" >
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="setNumber != null" >
+        set_number = #{setNumber,jdbcType=INTEGER},
+      </if>
+      <if test="quaternaryNumber != null" >
+        quaternary_number = #{quaternaryNumber,jdbcType=INTEGER},
+      </if>
+      <if test="synopsis != null" >
+        synopsis = #{synopsis,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiu.utopia.entity.Movie" >
+    update movie
+    set name = #{name,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      screen_writer = #{screenWriter,jdbcType=VARCHAR},
+      lead_actor = #{leadActor,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      filmmaking_area = #{filmmakingArea,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      release_time = #{releaseTime,jdbcType=VARCHAR},
+      movie_length = #{movieLength,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      evaluate_number = #{evaluateNumber,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      set_number = #{setNumber,jdbcType=INTEGER},
+      quaternary_number = #{quaternaryNumber,jdbcType=INTEGER},
+      synopsis = #{synopsis,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiu.utopia.entity.Movie" >
+    update movie
+    set name = #{name,jdbcType=VARCHAR},
+      director = #{director,jdbcType=VARCHAR},
+      screen_writer = #{screenWriter,jdbcType=VARCHAR},
+      lead_actor = #{leadActor,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      filmmaking_area = #{filmmakingArea,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      release_time = #{releaseTime,jdbcType=VARCHAR},
+      movie_length = #{movieLength,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      evaluate_number = #{evaluateNumber,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      set_number = #{setNumber,jdbcType=INTEGER},
+      quaternary_number = #{quaternaryNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -1,0 +1,5 @@
+
+1、标签数据库类型
+    tag
+
+    id name code  desc parentId type

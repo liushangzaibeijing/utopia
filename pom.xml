@@ -8,7 +8,7 @@
     <groupId>com.xiu</groupId>
     <artifactId>utopia</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>POM</packaging>
+    <!--<packaging>POM</packaging>-->
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -173,6 +173,12 @@
             <version>1.10</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>1.4.0</version>
+        </dependency>
 
 
 
@@ -239,6 +245,26 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <configurationFile>${basedir}\src\main\resources\generatorConfig.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.38</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
         </plugins>
     </build>
 
