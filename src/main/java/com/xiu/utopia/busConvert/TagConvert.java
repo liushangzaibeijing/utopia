@@ -77,8 +77,8 @@ public class TagConvert{
         int pageNum = total%pageSize==0?total/pageSize:total/pageSize+1;
         for(int i=240;i<=pageNum;i++){
             log.info("当前查询的当前页码：{}",i);
-            MovieExample movieExample = new MovieExample();
-            Page<MovieVo> moviePage =movieService.queryMovieListWithPage(movieExample,i,pageSize);
+            Movie movie = new Movie();
+            Page<MovieVo> moviePage =movieService.queryMovieListWithPage(movie,i,pageSize);
 
             updateMovie(moviePage.getResult());
         }

@@ -6,7 +6,9 @@ import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.service.MovieService;
 import com.xiu.utopia.utils.JsonUtil;
+import com.xiu.utopia.vo.MovieQuery;
 import com.xiu.utopia.vo.MovieVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +30,15 @@ public class MovieController extends BaseController {
 
     @RequestMapping("/movieListPage")
     //public String getMoviePage(Integer pageNum,Integer pageSize){
-        public String getMoviePage(@RequestBody  Map param){
+        public String getMoviePage(@RequestBody MovieQuery movieQuery){
 
-        Integer pageNum = (Integer) param.get("pageNum");
-        Integer pageSize = (Integer) param.get("pageSize");
+        Integer pageNum = (Integer) movieQuery.getPageNum();
+        Integer pageSize = (Integer) movieQuery.getPageSize();
         logger.info("当前查询的当前页码：{}",pageNum);
-        MovieExample movieExample = new MovieExample();
-        Page<MovieVo> moviePage =movieService.queryMovieListWithPage(movieExample,pageNum,pageSize);
+
+        Movie movie = new Movie();
+        BeanUtils.copyProperties(movieQuery,movie);
+        Page<MovieVo> moviePage =movieService.queryMovieListWithPage(movie,pageNum,pageSize);
 
         logger.info("查询出来的电影信息为：{}",moviePage);
         return success(pageTotal(moviePage));

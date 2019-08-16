@@ -13,10 +13,10 @@ public interface MovieService {
 
     /**
      * 根据查询条件查询对应的电影列表
-     * @param movieExample
+     * @param movie
      * @return
      */
-    Page<MovieVo> queryMovieListWithPage(MovieExample movieExample, Integer pageNum, Integer pageSize);
+    Page<MovieVo> queryMovieListWithPage(Movie movie, Integer pageNum, Integer pageSize);
 
     /**
      * 根据主键查询电影信息

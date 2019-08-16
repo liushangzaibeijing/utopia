@@ -40,7 +40,7 @@ public class MovieServiceImpl implements MovieService {
     TagMapper tagMapper;
 
     @Override
-    public Page<MovieVo> queryMovieListWithPage(MovieExample movieExample,Integer pageNum,Integer pageSize) {
+    public Page<MovieVo> queryMovieListWithPage(Movie movie,Integer pageNum,Integer pageSize) {
         if(pageNum == null ){
             pageNum = 0;
         }
@@ -48,13 +48,25 @@ public class MovieServiceImpl implements MovieService {
             pageSize = 20;
         }
         PageHelper.startPage(pageNum,pageSize);
+        //根据条件构造movieExample
+
+        MovieExample movieExample = new MovieExample();
+        MovieExample.Criteria criteria = movieExample.createCriteria();
+        if(movie.getId() !=null){
+            criteria.andIdEqualTo(movie.getId());
+        }
+        if(movie.getType() !=null){
+            criteria.andTypeEqualTo(movie.getType());
+        }
+
+        //TODO 其他查询条件 以后根据需求进行添加
 
         Page<MovieVo> movieVos = (Page<MovieVo>) busMovieMapper.selectVoByExampleWithBLOBs(movieExample);
 
         //对电影名称 电影简介进行截取
         log.info("本次查询出来的电影数量：{}", JsonUtil.obj2str(movieVos));
 
-        // TODO： 把循环list，把user对象转换成userVO对象
+        //循环list，把user对象转换成userVO对象
         for(MovieVo movieVo:movieVos){
             String shortName = movieVo.getName();
 
