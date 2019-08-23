@@ -38,6 +38,11 @@ public class BuninessServiceTest {
         tagConvert.convertMovie();
     }
 
+    @Test
+    public void testConvertBook(){
+        tagConvert.convertBook();
+    }
+
 
 
 

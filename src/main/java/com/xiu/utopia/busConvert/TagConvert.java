@@ -6,14 +6,13 @@ import com.xiu.utopia.dao.BookMapper;
 import com.xiu.utopia.dao.BusTagMapper;
 import com.xiu.utopia.dao.MovieMapper;
 import com.xiu.utopia.dao.TagMapper;
-import com.xiu.utopia.entity.Movie;
-import com.xiu.utopia.entity.MovieExample;
-import com.xiu.utopia.entity.Tag;
-import com.xiu.utopia.entity.TagExample;
+import com.xiu.utopia.entity.*;
+import com.xiu.utopia.service.BookService;
 import com.xiu.utopia.service.MovieService;
 import com.xiu.utopia.utils.JsonUtil;
 import com.xiu.utopia.vo.MovieVo;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +21,9 @@ import java.util.List;
 
 @Component
 @Transactional
-@Slf4j
 public class TagConvert{
 
+    Logger log = LoggerFactory.getLogger(TagConvert.class);
     @Autowired
     BusTagMapper busTagMapper;
     @Autowired
@@ -41,6 +40,8 @@ public class TagConvert{
     @Autowired
     BookMapper bookMapper;
 
+    @Autowired
+    BookService bookService;
 
     /**
      * 转换
@@ -122,50 +123,48 @@ public class TagConvert{
             tagEntity.setType(2);
 
             tagEntity.setParentId(0);
-
-
             tagMapper.insertSelective(tagEntity);
 
         }
     }
 
 
-//    /**
-//     * 转换书籍中的标签
-//     */
-//    public void convertBook(){
-//        int total = 69707;
-//        int pageSize = 50;
-//        int pageNum = total%pageSize==0?total/pageSize:total/pageSize+1;
-//        for(int i=0;i<pageNum;i++){
-//            log.info("当前查询的当前页码：{}",i);
-//            MovieExample movieExample = new MovieExample();
-//            Page<MovieVo> moviePage =bookMapper.queryBookListWithPage(movieExample,i,pageSize);
-//
-//            updateMovie(moviePage.getResult());
-//        }
-//
-//
-//    }
-//
-//    private void updateMovie(List<MovieVo> moviePage) {
-//        for(MovieVo movieVo:moviePage){
-//            Movie movie = new Movie();
-//            movie.setId(movieVo.getId());
-//
-//            TagExample example = new TagExample();
-//            example.createCriteria().andNameEqualTo(movieVo.getType())
-//                    .andTypeEqualTo(1);
-//            List<Tag> tags = tagMapper.selectByExample(example);
-//            if(tags.size()!=0&&tags.size()==1){
-//                movie.setType(tags.get(0).getId()+"");
-//            }
-//
-//            MovieExample movieExample = new MovieExample();
-//            movieExample.createCriteria().andIdEqualTo(movieVo.getId());
-//            movieMapper.updateByExampleSelective(movie,movieExample);
-//        }
-//    }
+
+    /**
+     * 转换书籍中的标签
+     */
+    public void convertBook(){
+        int total = 69707;
+        int pageSize = 50;
+        int pageNum = total%pageSize==0?total/pageSize:total/pageSize+1;
+        for(int i=0;i<pageNum;i++){
+            log.info("当前查询的当前页码：{}",i);
+            Book book = new Book();
+            Page<Book> bookPage =bookService.queryBookListWithPage(book,i,pageSize);
+
+            updateBook(bookPage.getResult());
+        }
+
+
+    }
+
+    private void updateBook(List<Book> booksPage) {
+        for(Book book:booksPage){
+            Book bookU = new Book();
+            bookU.setId(book.getId());
+
+            TagExample example = new TagExample();
+            example.createCriteria().andNameEqualTo(book.getTag())
+                    .andTypeEqualTo(2);
+            List<Tag> tags = tagMapper.selectByExample(example);
+            if(tags.size()!=0&&tags.size()==1){
+                bookU.setTag(tags.get(0).getId()+"");
+                BookExample bookExample = new BookExample();
+                bookExample.createCriteria().andIdEqualTo(bookU.getId());
+                bookMapper.updateByExampleSelective(bookU,bookExample);
+            }
+        }
+    }
 
 
 
