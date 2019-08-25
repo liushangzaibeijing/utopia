@@ -26,7 +26,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class MovieServiceImpl implements MovieService {
+public class MovieServiceImpl extends BaseService implements MovieService  {
 
     private Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
@@ -80,14 +80,7 @@ public class MovieServiceImpl implements MovieService {
         return movieVos;
     }
 
-    /**
-     * 将标签转换为
-     * @param type
-     * @return
-     */
-    private String convertType(Integer type) {
-        return tagMapper.selectByPrimaryKey(type).getName();
-    }
+
 
     @Override
     public MovieVo queryMoviebyId(Integer id) {

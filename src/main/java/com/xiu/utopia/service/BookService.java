@@ -1,7 +1,10 @@
 package com.xiu.utopia.service;
 
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.xiu.utopia.entity.Book;
+import com.xiu.utopia.vo.BookVo;
+
+import java.util.List;
 
 public interface BookService {
 
@@ -11,7 +14,7 @@ public interface BookService {
      * @param book
      * @return
      */
-    Page<Book> queryBookListWithPage(Book book, Integer pageNum, Integer pageSize);
+    PageInfo<BookVo> queryBookListWithPage(Book book, Integer pageNum, Integer pageSize);
 
     /**
      * 根据主键查询书籍信息

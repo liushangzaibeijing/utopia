@@ -1,6 +1,7 @@
 package com.xiu.utopia.busConvert;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.xiu.utopia.common.enums.TagType;
 import com.xiu.utopia.dao.BookMapper;
 import com.xiu.utopia.dao.BusTagMapper;
@@ -10,16 +11,18 @@ import com.xiu.utopia.entity.*;
 import com.xiu.utopia.service.BookService;
 import com.xiu.utopia.service.MovieService;
 import com.xiu.utopia.utils.JsonUtil;
+import com.xiu.utopia.vo.BookVo;
 import com.xiu.utopia.vo.MovieVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Component
+@Service
 @Transactional
 public class TagConvert{
 
@@ -140,15 +143,15 @@ public class TagConvert{
         for(int i=0;i<pageNum;i++){
             log.info("当前查询的当前页码：{}",i);
             Book book = new Book();
-            Page<Book> bookPage =bookService.queryBookListWithPage(book,i,pageSize);
+            PageInfo<BookVo> bookPage =bookService.queryBookListWithPage(book,i,pageSize);
 
-            updateBook(bookPage.getResult());
+            updateBook(bookPage.getList());
         }
 
 
     }
 
-    private void updateBook(List<Book> booksPage) {
+    private void updateBook(List<BookVo> booksPage) {
         for(Book book:booksPage){
             Book bookU = new Book();
             bookU.setId(book.getId());

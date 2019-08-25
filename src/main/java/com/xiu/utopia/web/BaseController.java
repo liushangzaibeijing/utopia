@@ -75,4 +75,22 @@ public class BaseController {
         return jsonObject.toString();
     }
 
+    /**
+     * Title: pageTotal
+     * Description: 分页结果
+     *
+     * @author zhaozhao
+     * @date 2018-6-4 15:45
+     */
+    protected <T> String pageTotal(PageInfo<T> page) {
+        String jsonArrStr = JsonUtil.obj2str(page.getList());
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", jsonArrStr);
+        jsonObject.put("total", page.getTotal());
+        jsonObject.put("page", page.getPageNum());
+        jsonObject.put("maxPage", page.getPages());
+        jsonObject.put("size", page.getPageSize());
+        return jsonObject.toString();
+    }
+
 }
