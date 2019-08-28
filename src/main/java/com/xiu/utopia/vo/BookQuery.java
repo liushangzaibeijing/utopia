@@ -13,6 +13,7 @@ public class BookQuery extends Book {
      */
     private Integer pageSize;
 
+
     public Integer getPageNum() {
         return pageNum;
     }

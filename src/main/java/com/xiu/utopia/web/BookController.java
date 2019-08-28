@@ -51,9 +51,13 @@ public class BookController extends BaseController {
     @RequestMapping("/bookDetail")
     public String getBookDetail(@RequestBody  Integer id){
        logger.info("查询书籍详情开始");
-        Book book =bookService.queryBookbyId(id);
+        BookVo bookVo =bookService.queryBookbyId(id);
 
-        logger.info("查询出来的id 为{}书籍信息为：{}",id,JsonUtil.obj2str(book));
-        return success(JsonUtil.obj2str(book));
+        if(bookVo==null){
+            failure(404,"没有查询到对应的书籍信息");
+        }
+        logger.info("查询出来的id 为{}书籍信息为：{}",id,JsonUtil.obj2str(bookVo));
+
+        return success(JsonUtil.obj2str(bookVo));
     }
 }

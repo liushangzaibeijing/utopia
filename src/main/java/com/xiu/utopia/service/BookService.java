@@ -21,5 +21,5 @@ public interface BookService {
      * @param id 主键
      * @return
      */
-    Book queryBookbyId(Integer id);
+    BookVo queryBookbyId(Integer id);
 }
