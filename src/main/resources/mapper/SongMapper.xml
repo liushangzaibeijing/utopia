@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.SongMapper" >
+
+    <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Song" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="song_id" property="songId" jdbcType="INTEGER" />
+        <result column="song_mid" property="songMid" jdbcType="VARCHAR" />
+        <result column="song_name" property="songName" jdbcType="VARCHAR" />
+        <result column="song_type" property="songType" jdbcType="VARCHAR" />
+        <result column="album_id" property="albumId" jdbcType="VARCHAR" />
+        <result column="singer_mid" property="singerMid" jdbcType="VARCHAR" />
+        <result column="time_public" property="timePublic" jdbcType="VARCHAR" />
+        <result column="song_attr" property="songAttr" jdbcType="VARCHAR" />
+        <result column="duration" property="duration" jdbcType="VARCHAR" />
+        <result column="lyric" property="lyric" jdbcType="LONGVARCHAR" />
+        <result column="song_url" property="songUrl" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, song_id, song_mid, song_name, song_type, album_id, singer_mid, time_public, song_attr, 
+        duration, lyric, song_url
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.SongExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from song
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from song
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from song
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.xiu.utopia.entity.SongExample" >
+        delete from song
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.xiu.utopia.entity.Song" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into song (song_id, song_mid, song_name, 
+            song_type, album_id, singer_mid, 
+            time_public, song_attr, duration, 
+            lyric, song_url)
+        values (#{songId,jdbcType=INTEGER}, #{songMid,jdbcType=VARCHAR}, #{songName,jdbcType=VARCHAR}, 
+            #{songType,jdbcType=VARCHAR}, #{albumId,jdbcType=VARCHAR}, #{singerMid,jdbcType=VARCHAR}, 
+            #{timePublic,jdbcType=VARCHAR}, #{songAttr,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR}, 
+            #{lyric,jdbcType=LONGVARCHAR}, #{songUrl,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xiu.utopia.entity.Song" >
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into song
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="songId != null" >
+                song_id,
+            </if>
+            <if test="songMid != null" >
+                song_mid,
+            </if>
+            <if test="songName != null" >
+                song_name,
+            </if>
+            <if test="songType != null" >
+                song_type,
+            </if>
+            <if test="albumId != null" >
+                album_id,
+            </if>
+            <if test="singerMid != null" >
+                singer_mid,
+            </if>
+            <if test="timePublic != null" >
+                time_public,
+            </if>
+            <if test="songAttr != null" >
+                song_attr,
+            </if>
+            <if test="duration != null" >
+                duration,
+            </if>
+            <if test="lyric != null" >
+                lyric,
+            </if>
+            <if test="songUrl != null" >
+                song_url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="songId != null" >
+                #{songId,jdbcType=INTEGER},
+            </if>
+            <if test="songMid != null" >
+                #{songMid,jdbcType=VARCHAR},
+            </if>
+            <if test="songName != null" >
+                #{songName,jdbcType=VARCHAR},
+            </if>
+            <if test="songType != null" >
+                #{songType,jdbcType=VARCHAR},
+            </if>
+            <if test="albumId != null" >
+                #{albumId,jdbcType=VARCHAR},
+            </if>
+            <if test="singerMid != null" >
+                #{singerMid,jdbcType=VARCHAR},
+            </if>
+            <if test="timePublic != null" >
+                #{timePublic,jdbcType=VARCHAR},
+            </if>
+            <if test="songAttr != null" >
+                #{songAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null" >
+                #{duration,jdbcType=VARCHAR},
+            </if>
+            <if test="lyric != null" >
+                #{lyric,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="songUrl != null" >
+                #{songUrl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.xiu.utopia.entity.SongExample" resultType="java.lang.Integer" >
+        select count(*) from song
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update song
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.songId != null" >
+                song_id = #{record.songId,jdbcType=INTEGER},
+            </if>
+            <if test="record.songMid != null" >
+                song_mid = #{record.songMid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.songName != null" >
+                song_name = #{record.songName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.songType != null" >
+                song_type = #{record.songType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.albumId != null" >
+                album_id = #{record.albumId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.singerMid != null" >
+                singer_mid = #{record.singerMid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.timePublic != null" >
+                time_public = #{record.timePublic,jdbcType=VARCHAR},
+            </if>
+            <if test="record.songAttr != null" >
+                song_attr = #{record.songAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.duration != null" >
+                duration = #{record.duration,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lyric != null" >
+                lyric = #{record.lyric,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.songUrl != null" >
+                song_url = #{record.songUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update song
+        set id = #{record.id,jdbcType=INTEGER},
+            song_id = #{record.songId,jdbcType=INTEGER},
+            song_mid = #{record.songMid,jdbcType=VARCHAR},
+            song_name = #{record.songName,jdbcType=VARCHAR},
+            song_type = #{record.songType,jdbcType=VARCHAR},
+            album_id = #{record.albumId,jdbcType=VARCHAR},
+            singer_mid = #{record.singerMid,jdbcType=VARCHAR},
+            time_public = #{record.timePublic,jdbcType=VARCHAR},
+            song_attr = #{record.songAttr,jdbcType=VARCHAR},
+            duration = #{record.duration,jdbcType=VARCHAR},
+            lyric = #{record.lyric,jdbcType=LONGVARCHAR},
+            song_url = #{record.songUrl,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xiu.utopia.entity.Song" >
+        update song
+        <set >
+            <if test="songId != null" >
+                song_id = #{songId,jdbcType=INTEGER},
+            </if>
+            <if test="songMid != null" >
+                song_mid = #{songMid,jdbcType=VARCHAR},
+            </if>
+            <if test="songName != null" >
+                song_name = #{songName,jdbcType=VARCHAR},
+            </if>
+            <if test="songType != null" >
+                song_type = #{songType,jdbcType=VARCHAR},
+            </if>
+            <if test="albumId != null" >
+                album_id = #{albumId,jdbcType=VARCHAR},
+            </if>
+            <if test="singerMid != null" >
+                singer_mid = #{singerMid,jdbcType=VARCHAR},
+            </if>
+            <if test="timePublic != null" >
+                time_public = #{timePublic,jdbcType=VARCHAR},
+            </if>
+            <if test="songAttr != null" >
+                song_attr = #{songAttr,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null" >
+                duration = #{duration,jdbcType=VARCHAR},
+            </if>
+            <if test="lyric != null" >
+                lyric = #{lyric,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="songUrl != null" >
+                song_url = #{songUrl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xiu.utopia.entity.Song" >
+        update song
+        set song_id = #{songId,jdbcType=INTEGER},
+            song_mid = #{songMid,jdbcType=VARCHAR},
+            song_name = #{songName,jdbcType=VARCHAR},
+            song_type = #{songType,jdbcType=VARCHAR},
+            album_id = #{albumId,jdbcType=VARCHAR},
+            singer_mid = #{singerMid,jdbcType=VARCHAR},
+            time_public = #{timePublic,jdbcType=VARCHAR},
+            song_attr = #{songAttr,jdbcType=VARCHAR},
+            duration = #{duration,jdbcType=VARCHAR},
+            lyric = #{lyric,jdbcType=LONGVARCHAR},
+            song_url = #{songUrl,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

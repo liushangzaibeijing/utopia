@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.AlbumMapper" >
+  <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Album" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="album_id" property="albumId" jdbcType="INTEGER" />
+    <result column="album_mid" property="albumMid" jdbcType="VARCHAR" />
+    <result column="album_name" property="albumName" jdbcType="VARCHAR" />
+    <result column="album_type" property="albumType" jdbcType="VARCHAR" />
+    <result column="album_pic" property="albumPic" jdbcType="VARCHAR" />
+    <result column="signer_mid" property="signerMid" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="lan" property="lan" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="pub_time" property="pubTime" jdbcType="TIMESTAMP" />
+    <result column="descption" property="descption" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, album_id, album_mid, album_name, album_type, album_pic, signer_mid, school, score, 
+    lan, company_name, pub_time, descption
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.AlbumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from album
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from album
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiu.utopia.entity.AlbumExample" >
+    delete from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiu.utopia.entity.Album" >
+    insert into album (id, album_id, album_mid, 
+      album_name, album_type, album_pic, 
+      signer_mid, school, score, 
+      lan, company_name, pub_time, 
+      descption)
+    values (#{id,jdbcType=INTEGER}, #{albumId,jdbcType=INTEGER}, #{albumMid,jdbcType=VARCHAR}, 
+      #{albumName,jdbcType=VARCHAR}, #{albumType,jdbcType=VARCHAR}, #{albumPic,jdbcType=VARCHAR}, 
+      #{signerMid,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+      #{lan,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{pubTime,jdbcType=TIMESTAMP}, 
+      #{descption,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiu.utopia.entity.Album" >
+    insert into album
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="albumId != null" >
+        album_id,
+      </if>
+      <if test="albumMid != null" >
+        album_mid,
+      </if>
+      <if test="albumName != null" >
+        album_name,
+      </if>
+      <if test="albumType != null" >
+        album_type,
+      </if>
+      <if test="albumPic != null" >
+        album_pic,
+      </if>
+      <if test="signerMid != null" >
+        signer_mid,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="lan != null" >
+        lan,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="pubTime != null" >
+        pub_time,
+      </if>
+      <if test="descption != null" >
+        descption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="albumId != null" >
+        #{albumId,jdbcType=INTEGER},
+      </if>
+      <if test="albumMid != null" >
+        #{albumMid,jdbcType=VARCHAR},
+      </if>
+      <if test="albumName != null" >
+        #{albumName,jdbcType=VARCHAR},
+      </if>
+      <if test="albumType != null" >
+        #{albumType,jdbcType=VARCHAR},
+      </if>
+      <if test="albumPic != null" >
+        #{albumPic,jdbcType=VARCHAR},
+      </if>
+      <if test="signerMid != null" >
+        #{signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="lan != null" >
+        #{lan,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTime != null" >
+        #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descption != null" >
+        #{descption,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiu.utopia.entity.AlbumExample" resultType="java.lang.Integer" >
+    select count(*) from album
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update album
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.albumId != null" >
+        album_id = #{record.albumId,jdbcType=INTEGER},
+      </if>
+      <if test="record.albumMid != null" >
+        album_mid = #{record.albumMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.albumName != null" >
+        album_name = #{record.albumName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.albumType != null" >
+        album_type = #{record.albumType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.albumPic != null" >
+        album_pic = #{record.albumPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signerMid != null" >
+        signer_mid = #{record.signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        score = #{record.score,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lan != null" >
+        lan = #{record.lan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pubTime != null" >
+        pub_time = #{record.pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.descption != null" >
+        descption = #{record.descption,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update album
+    set id = #{record.id,jdbcType=INTEGER},
+      album_id = #{record.albumId,jdbcType=INTEGER},
+      album_mid = #{record.albumMid,jdbcType=VARCHAR},
+      album_name = #{record.albumName,jdbcType=VARCHAR},
+      album_type = #{record.albumType,jdbcType=VARCHAR},
+      album_pic = #{record.albumPic,jdbcType=VARCHAR},
+      signer_mid = #{record.signerMid,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=VARCHAR},
+      lan = #{record.lan,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      pub_time = #{record.pubTime,jdbcType=TIMESTAMP},
+      descption = #{record.descption,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiu.utopia.entity.Album" >
+    update album
+    <set >
+      <if test="albumId != null" >
+        album_id = #{albumId,jdbcType=INTEGER},
+      </if>
+      <if test="albumMid != null" >
+        album_mid = #{albumMid,jdbcType=VARCHAR},
+      </if>
+      <if test="albumName != null" >
+        album_name = #{albumName,jdbcType=VARCHAR},
+      </if>
+      <if test="albumType != null" >
+        album_type = #{albumType,jdbcType=VARCHAR},
+      </if>
+      <if test="albumPic != null" >
+        album_pic = #{albumPic,jdbcType=VARCHAR},
+      </if>
+      <if test="signerMid != null" >
+        signer_mid = #{signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="lan != null" >
+        lan = #{lan,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTime != null" >
+        pub_time = #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="descption != null" >
+        descption = #{descption,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiu.utopia.entity.Album" >
+    update album
+    set album_id = #{albumId,jdbcType=INTEGER},
+      album_mid = #{albumMid,jdbcType=VARCHAR},
+      album_name = #{albumName,jdbcType=VARCHAR},
+      album_type = #{albumType,jdbcType=VARCHAR},
+      album_pic = #{albumPic,jdbcType=VARCHAR},
+      signer_mid = #{signerMid,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      lan = #{lan,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      pub_time = #{pubTime,jdbcType=TIMESTAMP},
+      descption = #{descption,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

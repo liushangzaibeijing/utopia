@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.SingerMapper" >
+  <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Singer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="signer_id" property="signerId" jdbcType="INTEGER" />
+    <result column="signer_mid" property="signerMid" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="english_name" property="englishName" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="birth_place" property="birthPlace" jdbcType="VARCHAR" />
+    <result column="birth_time" property="birthTime" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="members" property="members" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="first_letter" property="firstLetter" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="broker" property="broker" jdbcType="VARCHAR" />
+    <result column="strat_time" property="stratTime" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="pic_local" property="picLocal" jdbcType="VARCHAR" />
+    <result column="heigth" property="heigth" jdbcType="VARCHAR" />
+    <result column="weigth" property="weigth" jdbcType="VARCHAR" />
+    <result column="blood_type" property="bloodType" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="constellation" property="constellation" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="fans_name" property="fansName" jdbcType="VARCHAR" />
+    <result column="idol_color" property="idolColor" jdbcType="VARCHAR" />
+    <result column="speciality" property="speciality" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="hobby" property="hobby" jdbcType="VARCHAR" />
+    <result column="isOver" property="isOver" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xiu.utopia.entity.Singer" extends="BaseResultMap" >
+    <result column="descption" property="descption" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, signer_id, signer_mid, full_name, english_name, short_name, contract_id, birth_place, 
+    birth_time, profession, sex, members, school, first_letter, nation, broker, strat_time, 
+    pic, pic_local, heigth, weigth, blood_type, graduate_school, constellation, language, 
+    fans_name, idol_color, speciality, native_place, hobby, isOver
+  </sql>
+  <sql id="Blob_Column_List" >
+    descption
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.xiu.utopia.entity.SingerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from singer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.SingerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from singer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from singer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from singer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiu.utopia.entity.SingerExample" >
+    delete from singer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiu.utopia.entity.Singer" >
+    insert into singer (id, signer_id, signer_mid, 
+      full_name, english_name, short_name, 
+      contract_id, birth_place, birth_time, 
+      profession, sex, members, 
+      school, first_letter, nation, 
+      broker, strat_time, pic, 
+      pic_local, heigth, weigth, 
+      blood_type, graduate_school, constellation, 
+      language, fans_name, idol_color, 
+      speciality, native_place, hobby, 
+      isOver, descption)
+    values (#{id,jdbcType=INTEGER}, #{signerId,jdbcType=INTEGER}, #{signerMid,jdbcType=VARCHAR}, 
+      #{fullName,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{contractId,jdbcType=VARCHAR}, #{birthPlace,jdbcType=VARCHAR}, #{birthTime,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{members,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{firstLetter,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{broker,jdbcType=VARCHAR}, #{stratTime,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{picLocal,jdbcType=VARCHAR}, #{heigth,jdbcType=VARCHAR}, #{weigth,jdbcType=VARCHAR}, 
+      #{bloodType,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, #{constellation,jdbcType=VARCHAR}, 
+      #{language,jdbcType=VARCHAR}, #{fansName,jdbcType=VARCHAR}, #{idolColor,jdbcType=VARCHAR}, 
+      #{speciality,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
+      #{isOver,jdbcType=INTEGER}, #{descption,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiu.utopia.entity.Singer" >
+    insert into singer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="signerId != null" >
+        signer_id,
+      </if>
+      <if test="signerMid != null" >
+        signer_mid,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="englishName != null" >
+        english_name,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="birthPlace != null" >
+        birth_place,
+      </if>
+      <if test="birthTime != null" >
+        birth_time,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="members != null" >
+        members,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="firstLetter != null" >
+        first_letter,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="broker != null" >
+        broker,
+      </if>
+      <if test="stratTime != null" >
+        strat_time,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="picLocal != null" >
+        pic_local,
+      </if>
+      <if test="heigth != null" >
+        heigth,
+      </if>
+      <if test="weigth != null" >
+        weigth,
+      </if>
+      <if test="bloodType != null" >
+        blood_type,
+      </if>
+      <if test="graduateSchool != null" >
+        graduate_school,
+      </if>
+      <if test="constellation != null" >
+        constellation,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="fansName != null" >
+        fans_name,
+      </if>
+      <if test="idolColor != null" >
+        idol_color,
+      </if>
+      <if test="speciality != null" >
+        speciality,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="hobby != null" >
+        hobby,
+      </if>
+      <if test="isOver != null" >
+        isOver,
+      </if>
+      <if test="descption != null" >
+        descption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="signerId != null" >
+        #{signerId,jdbcType=INTEGER},
+      </if>
+      <if test="signerMid != null" >
+        #{signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null" >
+        #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null" >
+        #{birthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="members != null" >
+        #{members,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLetter != null" >
+        #{firstLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="broker != null" >
+        #{broker,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null" >
+        #{stratTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="picLocal != null" >
+        #{picLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="heigth != null" >
+        #{heigth,jdbcType=VARCHAR},
+      </if>
+      <if test="weigth != null" >
+        #{weigth,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null" >
+        #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="fansName != null" >
+        #{fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="idolColor != null" >
+        #{idolColor,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null" >
+        #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="isOver != null" >
+        #{isOver,jdbcType=INTEGER},
+      </if>
+      <if test="descption != null" >
+        #{descption,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiu.utopia.entity.SingerExample" resultType="java.lang.Integer" >
+    select count(*) from singer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update singer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.signerId != null" >
+        signer_id = #{record.signerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.signerMid != null" >
+        signer_mid = #{record.signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullName != null" >
+        full_name = #{record.fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishName != null" >
+        english_name = #{record.englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null" >
+        short_name = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractId != null" >
+        contract_id = #{record.contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthPlace != null" >
+        birth_place = #{record.birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthTime != null" >
+        birth_time = #{record.birthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.members != null" >
+        members = #{record.members,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstLetter != null" >
+        first_letter = #{record.firstLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.broker != null" >
+        broker = #{record.broker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stratTime != null" >
+        strat_time = #{record.stratTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pic != null" >
+        pic = #{record.pic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picLocal != null" >
+        pic_local = #{record.picLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.heigth != null" >
+        heigth = #{record.heigth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weigth != null" >
+        weigth = #{record.weigth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodType != null" >
+        blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateSchool != null" >
+        graduate_school = #{record.graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.constellation != null" >
+        constellation = #{record.constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.language != null" >
+        language = #{record.language,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fansName != null" >
+        fans_name = #{record.fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idolColor != null" >
+        idol_color = #{record.idolColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speciality != null" >
+        speciality = #{record.speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hobby != null" >
+        hobby = #{record.hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isOver != null" >
+        isOver = #{record.isOver,jdbcType=INTEGER},
+      </if>
+      <if test="record.descption != null" >
+        descption = #{record.descption,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update singer
+    set id = #{record.id,jdbcType=INTEGER},
+      signer_id = #{record.signerId,jdbcType=INTEGER},
+      signer_mid = #{record.signerMid,jdbcType=VARCHAR},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      english_name = #{record.englishName,jdbcType=VARCHAR},
+      short_name = #{record.shortName,jdbcType=VARCHAR},
+      contract_id = #{record.contractId,jdbcType=VARCHAR},
+      birth_place = #{record.birthPlace,jdbcType=VARCHAR},
+      birth_time = #{record.birthTime,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      members = #{record.members,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      first_letter = #{record.firstLetter,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      broker = #{record.broker,jdbcType=VARCHAR},
+      strat_time = #{record.stratTime,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      pic_local = #{record.picLocal,jdbcType=VARCHAR},
+      heigth = #{record.heigth,jdbcType=VARCHAR},
+      weigth = #{record.weigth,jdbcType=VARCHAR},
+      blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      graduate_school = #{record.graduateSchool,jdbcType=VARCHAR},
+      constellation = #{record.constellation,jdbcType=VARCHAR},
+      language = #{record.language,jdbcType=VARCHAR},
+      fans_name = #{record.fansName,jdbcType=VARCHAR},
+      idol_color = #{record.idolColor,jdbcType=VARCHAR},
+      speciality = #{record.speciality,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      hobby = #{record.hobby,jdbcType=VARCHAR},
+      isOver = #{record.isOver,jdbcType=INTEGER},
+      descption = #{record.descption,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update singer
+    set id = #{record.id,jdbcType=INTEGER},
+      signer_id = #{record.signerId,jdbcType=INTEGER},
+      signer_mid = #{record.signerMid,jdbcType=VARCHAR},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      english_name = #{record.englishName,jdbcType=VARCHAR},
+      short_name = #{record.shortName,jdbcType=VARCHAR},
+      contract_id = #{record.contractId,jdbcType=VARCHAR},
+      birth_place = #{record.birthPlace,jdbcType=VARCHAR},
+      birth_time = #{record.birthTime,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      members = #{record.members,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      first_letter = #{record.firstLetter,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      broker = #{record.broker,jdbcType=VARCHAR},
+      strat_time = #{record.stratTime,jdbcType=VARCHAR},
+      pic = #{record.pic,jdbcType=VARCHAR},
+      pic_local = #{record.picLocal,jdbcType=VARCHAR},
+      heigth = #{record.heigth,jdbcType=VARCHAR},
+      weigth = #{record.weigth,jdbcType=VARCHAR},
+      blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      graduate_school = #{record.graduateSchool,jdbcType=VARCHAR},
+      constellation = #{record.constellation,jdbcType=VARCHAR},
+      language = #{record.language,jdbcType=VARCHAR},
+      fans_name = #{record.fansName,jdbcType=VARCHAR},
+      idol_color = #{record.idolColor,jdbcType=VARCHAR},
+      speciality = #{record.speciality,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      hobby = #{record.hobby,jdbcType=VARCHAR},
+      isOver = #{record.isOver,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiu.utopia.entity.Singer" >
+    update singer
+    <set >
+      <if test="signerId != null" >
+        signer_id = #{signerId,jdbcType=INTEGER},
+      </if>
+      <if test="signerMid != null" >
+        signer_mid = #{signerMid,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        english_name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="birthPlace != null" >
+        birth_place = #{birthPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="birthTime != null" >
+        birth_time = #{birthTime,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="members != null" >
+        members = #{members,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLetter != null" >
+        first_letter = #{firstLetter,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="broker != null" >
+        broker = #{broker,jdbcType=VARCHAR},
+      </if>
+      <if test="stratTime != null" >
+        strat_time = #{stratTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="picLocal != null" >
+        pic_local = #{picLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="heigth != null" >
+        heigth = #{heigth,jdbcType=VARCHAR},
+      </if>
+      <if test="weigth != null" >
+        weigth = #{weigth,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null" >
+        constellation = #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="fansName != null" >
+        fans_name = #{fansName,jdbcType=VARCHAR},
+      </if>
+      <if test="idolColor != null" >
+        idol_color = #{idolColor,jdbcType=VARCHAR},
+      </if>
+      <if test="speciality != null" >
+        speciality = #{speciality,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null" >
+        hobby = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="isOver != null" >
+        isOver = #{isOver,jdbcType=INTEGER},
+      </if>
+      <if test="descption != null" >
+        descption = #{descption,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiu.utopia.entity.Singer" >
+    update singer
+    set signer_id = #{signerId,jdbcType=INTEGER},
+      signer_mid = #{signerMid,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      contract_id = #{contractId,jdbcType=VARCHAR},
+      birth_place = #{birthPlace,jdbcType=VARCHAR},
+      birth_time = #{birthTime,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      members = #{members,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      first_letter = #{firstLetter,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      broker = #{broker,jdbcType=VARCHAR},
+      strat_time = #{stratTime,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      pic_local = #{picLocal,jdbcType=VARCHAR},
+      heigth = #{heigth,jdbcType=VARCHAR},
+      weigth = #{weigth,jdbcType=VARCHAR},
+      blood_type = #{bloodType,jdbcType=VARCHAR},
+      graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      fans_name = #{fansName,jdbcType=VARCHAR},
+      idol_color = #{idolColor,jdbcType=VARCHAR},
+      speciality = #{speciality,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      isOver = #{isOver,jdbcType=INTEGER},
+      descption = #{descption,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiu.utopia.entity.Singer" >
+    update singer
+    set signer_id = #{signerId,jdbcType=INTEGER},
+      signer_mid = #{signerMid,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      contract_id = #{contractId,jdbcType=VARCHAR},
+      birth_place = #{birthPlace,jdbcType=VARCHAR},
+      birth_time = #{birthTime,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      members = #{members,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      first_letter = #{firstLetter,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      broker = #{broker,jdbcType=VARCHAR},
+      strat_time = #{stratTime,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      pic_local = #{picLocal,jdbcType=VARCHAR},
+      heigth = #{heigth,jdbcType=VARCHAR},
+      weigth = #{weigth,jdbcType=VARCHAR},
+      blood_type = #{bloodType,jdbcType=VARCHAR},
+      graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      fans_name = #{fansName,jdbcType=VARCHAR},
+      idol_color = #{idolColor,jdbcType=VARCHAR},
+      speciality = #{speciality,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      isOver = #{isOver,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
