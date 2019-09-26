@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.BusAlbumMapper">
+  <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Album" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="album_id" property="albumId" jdbcType="INTEGER" />
+    <result column="album_mid" property="albumMid" jdbcType="VARCHAR" />
+    <result column="album_name" property="albumName" jdbcType="VARCHAR" />
+    <result column="album_type" property="albumType" jdbcType="VARCHAR" />
+    <result column="album_pic" property="albumPic" jdbcType="VARCHAR" />
+    <result column="signer_mid" property="signerMid" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="lan" property="lan" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="pub_time" property="pubTime" jdbcType="TIMESTAMP" />
+    <result column="descption" property="descption" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+
+  <select id="queryAlbumList" resultMap="BaseResultMap" parameterType="int">
+    select  album.id, album.album_id, album.album_mid, album.album_name, album.album_type,
+     album.album_pic,album.signer_mid, album.school, album.score,
+    album.lan, album.company_name, album.pub_time, album.descption from album join singer
+    on album.signer_mid = singer.signer_mid
+    where singer.id = #{singerId}
+  </select>
+</mapper>

@@ -10,12 +10,9 @@ import com.xiu.utopia.dao.BookMapper;
 import com.xiu.utopia.dao.TagMapper;
 import com.xiu.utopia.entity.Book;
 import com.xiu.utopia.entity.BookExample;
-import com.xiu.utopia.entity.Movie;
-import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.service.BookService;
 import com.xiu.utopia.utils.JsonUtil;
 import com.xiu.utopia.vo.BookVo;
-import com.xiu.utopia.vo.MovieVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -40,7 +37,7 @@ public class BookServiceImpl extends BaseService implements BookService {
 
 
     @Override
-    public  PageInfo<BookVo>  queryBookListWithPage(Book book, Integer pageNum, Integer pageSize) {
+    public PageInfo<BookVo> queryBookListWithPage(Book book, Integer pageNum, Integer pageSize) {
         if(pageNum == null ){
             pageNum = 0;
         }
@@ -105,7 +102,7 @@ public class BookServiceImpl extends BaseService implements BookService {
 
         bookVo.setTagName(convertType(Integer.parseInt(book.getTag())));
         if(shortName.length()>= Constants.MAX_SHORT_NAME){
-            bookVo.setShortName(shortName.substring(0,Constants.MAX_SHORT_NAME)+"...");
+            bookVo.setShortName(shortName.substring(0, Constants.MAX_SHORT_NAME)+"...");
         }else{
             bookVo.setShortName(shortName);
         }

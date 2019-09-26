@@ -1,21 +1,12 @@
 package com.xiu.utopia.service.impl;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.google.common.collect.Lists;
-import com.xiu.utopia.common.Constants;
-import com.xiu.utopia.dao.BusMovieMapper;
-import com.xiu.utopia.dao.MovieMapper;
 import com.xiu.utopia.dao.TagMapper;
-import com.xiu.utopia.entity.*;
-import com.xiu.utopia.service.MovieService;
+import com.xiu.utopia.entity.Tag;
+import com.xiu.utopia.entity.TagExample;
 import com.xiu.utopia.service.TagService;
-import com.xiu.utopia.utils.JsonUtil;
-import com.xiu.utopia.vo.MovieVo;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

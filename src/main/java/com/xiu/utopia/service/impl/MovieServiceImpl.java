@@ -2,17 +2,18 @@ package com.xiu.utopia.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.xiu.utopia.common.Constants;
 import com.xiu.utopia.dao.BusMovieMapper;
 import com.xiu.utopia.dao.MovieMapper;
 import com.xiu.utopia.dao.TagMapper;
-import com.xiu.utopia.entity.*;
+import com.xiu.utopia.entity.Actor;
+import com.xiu.utopia.entity.Director;
+import com.xiu.utopia.entity.Movie;
+import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.service.MovieService;
 import com.xiu.utopia.utils.JsonUtil;
 import com.xiu.utopia.vo.MovieVo;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -20,13 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 @Transactional
-public class MovieServiceImpl extends BaseService implements MovieService  {
+public class MovieServiceImpl extends BaseService implements MovieService {
 
     private Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
@@ -40,7 +40,7 @@ public class MovieServiceImpl extends BaseService implements MovieService  {
     TagMapper tagMapper;
 
     @Override
-    public Page<MovieVo> queryMovieListWithPage(Movie movie,Integer pageNum,Integer pageSize) {
+    public Page<MovieVo> queryMovieListWithPage(Movie movie, Integer pageNum, Integer pageSize) {
         if(pageNum == null ){
             pageNum = 0;
         }

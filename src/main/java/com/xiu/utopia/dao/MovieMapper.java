@@ -2,8 +2,9 @@ package com.xiu.utopia.dao;
 
 import com.xiu.utopia.entity.Movie;
 import com.xiu.utopia.entity.MovieExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MovieMapper {
     int countByExample(MovieExample example);

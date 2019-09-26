@@ -1,12 +1,12 @@
 package com.xiu.utopia.vo;
 
-import com.xiu.utopia.entity.Director;
 import com.xiu.utopia.entity.Actor;
+import com.xiu.utopia.entity.Director;
 import com.xiu.utopia.entity.Movie;
 
 import java.util.List;
 
-public class MovieVo extends Movie{
+public class MovieVo extends Movie {
 
     /**
      * 电影名字简称

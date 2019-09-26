@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiu.utopia.dao.BusSongMapper" >
+
+    <resultMap id="BaseResultMap" type="com.xiu.utopia.entity.Song" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="song_id" property="songId" jdbcType="INTEGER" />
+        <result column="song_mid" property="songMid" jdbcType="VARCHAR" />
+        <result column="song_name" property="songName" jdbcType="VARCHAR" />
+        <result column="song_type" property="songType" jdbcType="VARCHAR" />
+        <result column="album_id" property="albumId" jdbcType="VARCHAR" />
+        <result column="singer_mid" property="singerMid" jdbcType="VARCHAR" />
+        <result column="time_public" property="timePublic" jdbcType="VARCHAR" />
+        <result column="song_attr" property="songAttr" jdbcType="VARCHAR" />
+        <result column="duration" property="duration" jdbcType="VARCHAR" />
+        <result column="lyric" property="lyric" jdbcType="LONGVARCHAR" />
+        <result column="song_url" property="songUrl" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
+        id, song_id, song_mid, song_name,singer_mid, duration
+    </sql>
+
+    <select id="selectSongPage" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.SongExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List" />
+        from song
+        <if test="_parameter != null" >
+            <include refid="com.xiu.utopia.dao.SongMapper.Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+</mapper>

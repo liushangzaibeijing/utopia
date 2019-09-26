@@ -4,8 +4,6 @@ import com.github.pagehelper.PageInfo;
 import com.xiu.utopia.entity.Book;
 import com.xiu.utopia.vo.BookVo;
 
-import java.util.List;
-
 public interface BookService {
 
 

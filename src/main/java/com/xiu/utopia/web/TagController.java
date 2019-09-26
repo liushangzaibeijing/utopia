@@ -1,8 +1,6 @@
 package com.xiu.utopia.web;
 
-import com.xiu.utopia.common.enums.TagType;
 import com.xiu.utopia.common.enums.Type;
-import com.xiu.utopia.entity.MovieExample;
 import com.xiu.utopia.entity.Tag;
 import com.xiu.utopia.service.TagService;
 import com.xiu.utopia.utils.JsonUtil;
@@ -32,7 +30,7 @@ public class TagController extends BaseController {
      * @return
      */
     @RequestMapping("/selectMovieTags")
-        public String selectMovieTags(@RequestBody  Tag tag){
+        public String selectMovieTags(@RequestBody Tag tag){
 
         List<Tag> tagList = getTags(tag, Type.MOVCIE_TYPE);
         return success(JsonUtil.obj2str(tagList));
@@ -45,7 +43,7 @@ public class TagController extends BaseController {
      * @return
      */
     @RequestMapping("/selectBookTags")
-    public String selectBookTags(@RequestBody  Tag tag){
+    public String selectBookTags(@RequestBody Tag tag){
 
         List<Tag> tagList = getTags(tag, Type.BOOK_TYPE);
         return success(JsonUtil.obj2str(tagList));

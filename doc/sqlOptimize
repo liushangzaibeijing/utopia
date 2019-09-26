@@ -1,0 +1,17 @@
+-- 更新歌曲信息的singerMid --
+update song set singer_mid = SUBSTRING_INDEX(singer_mid,",",1)
+
+-- 更新专辑信息 --
+update album set signer_mid = SUBSTRING_INDEX(signer_mid,",",1)
+
+//查询歌手 以及歌曲信息
+
+
+//查询歌手信息 分页
+
+//查询专辑信息 分页
+
+
+
+
+
