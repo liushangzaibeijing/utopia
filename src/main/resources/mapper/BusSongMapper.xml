@@ -38,4 +38,13 @@
         </if>
     </select>
 
+
+
+    <select id="selectLyric" resultMap="BaseResultMap" parameterType="string">
+        select
+        lyric,album_id
+        from song
+        where id = #{songId}
+    </select>
+
 </mapper>

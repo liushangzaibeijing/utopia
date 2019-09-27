@@ -9,4 +9,5 @@ public interface BusSongMapper extends SongMapper {
     List<Song> selectSongPage(SongExample example);
 
 
+    Song selectLyric(Integer songId);
 }

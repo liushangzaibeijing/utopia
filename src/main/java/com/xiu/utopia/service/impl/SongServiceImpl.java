@@ -2,16 +2,19 @@ package com.xiu.utopia.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.xiu.utopia.dao.AlbumMapper;
 import com.xiu.utopia.dao.BusSongMapper;
 import com.xiu.utopia.dao.SingerMapper;
-import com.xiu.utopia.entity.Singer;
-import com.xiu.utopia.entity.Song;
-import com.xiu.utopia.entity.SongExample;
+import com.xiu.utopia.entity.*;
 import com.xiu.utopia.service.SongService;
+import com.xiu.utopia.vo.SongPlayInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,6 +29,13 @@ public class SongServiceImpl implements SongService {
      */
     @Autowired
     BusSongMapper busSongMapper;
+
+
+    /**
+     * 专辑信息持久化类
+     */
+    @Autowired
+    AlbumMapper albumMapper;
 
     @Override
     public Page<Song> querySongList(Integer singerId, String albumMid, Integer currentPage, Integer pageSize) {
@@ -45,5 +55,34 @@ public class SongServiceImpl implements SongService {
         Page<Song> songs = (Page<Song>) busSongMapper.selectSongPage(songExample);
 
         return songs;
+    }
+
+    @Override
+    public SongPlayInfo getSongPlayInfo(Integer songId) {
+        Song song = busSongMapper.selectLyric(songId);
+        String lyricEncoder = song.getLyric();
+        SongPlayInfo songPlayInfo = new SongPlayInfo();
+
+        if(StringUtils.isBlank(lyricEncoder)){
+            songPlayInfo.setNolyric(true);
+        }else{
+              //获取歌词信息
+              String lyric = new String (Base64.decode(lyricEncoder));
+              songPlayInfo.setLyric(lyric);
+              songPlayInfo.setNolyric(false);
+        }
+
+        //设置
+        String albumId = song.getAlbumId();
+        songPlayInfo.setAlbumId(albumId);
+
+        AlbumExample albumQuery = new AlbumExample();
+        albumQuery.createCriteria().andAlbumMidEqualTo(albumId);
+
+        List<Album> albums = albumMapper.selectByExample(albumQuery);
+        String albumName = albums.get(0).getAlbumName();
+
+        songPlayInfo.setAlbumName(albumName);
+        return songPlayInfo;
     }
 }
