@@ -19,7 +19,7 @@
 
 
     <sql id="Base_Column_List" >
-        id, song_id, song_mid, song_name,singer_mid, duration
+        id, song_id, song_mid, song_name,singer_mid, duration,song_url
     </sql>
 
     <select id="selectSongPage" resultMap="BaseResultMap" parameterType="com.xiu.utopia.entity.SongExample" >
@@ -40,9 +40,9 @@
 
 
 
-    <select id="selectLyric" resultMap="BaseResultMap" parameterType="string">
+    <select id="selectLyric" resultMap="BaseResultMap" parameterType="int">
         select
-        lyric,album_id
+        lyric,album_id,singer_mid
         from song
         where id = #{songId}
     </select>

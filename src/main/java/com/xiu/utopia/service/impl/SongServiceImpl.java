@@ -62,7 +62,6 @@ public class SongServiceImpl implements SongService {
         Song song = busSongMapper.selectLyric(songId);
         String lyricEncoder = song.getLyric();
         SongPlayInfo songPlayInfo = new SongPlayInfo();
-
         if(StringUtils.isBlank(lyricEncoder)){
             songPlayInfo.setNolyric(true);
         }else{
@@ -71,18 +70,28 @@ public class SongServiceImpl implements SongService {
               songPlayInfo.setLyric(lyric);
               songPlayInfo.setNolyric(false);
         }
-
-        //设置
+        //设置专辑信息
         String albumId = song.getAlbumId();
         songPlayInfo.setAlbumId(albumId);
-
         AlbumExample albumQuery = new AlbumExample();
         albumQuery.createCriteria().andAlbumMidEqualTo(albumId);
-
         List<Album> albums = albumMapper.selectByExample(albumQuery);
-        String albumName = albums.get(0).getAlbumName();
 
-        songPlayInfo.setAlbumName(albumName);
+        if(albums!=null && albums.size()!=0){
+            Album album = albums.get(0);
+            String albumName = album.getAlbumName();
+            songPlayInfo.setAlbumName(albumName);
+            songPlayInfo.setAlbumUrl(album.getAlbumPic());
+        }
+        String singerMid = song.getSingerMid();
+
+        SingerExample singerQuery = new SingerExample();
+        singerQuery.createCriteria().andSignerMidEqualTo(singerMid);
+        List<Singer> singers = singerMapper.selectByExample(singerQuery);
+        if(singers!=null && singers.size()!=0){
+            String singerUrl = singers.get(0).getPicLocal();
+            songPlayInfo.setSingerUrl(singerUrl);
+        }
         return songPlayInfo;
     }
 }

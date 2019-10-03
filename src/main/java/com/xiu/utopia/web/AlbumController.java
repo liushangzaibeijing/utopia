@@ -21,8 +21,6 @@ public class AlbumController extends BaseController {
     @Autowired
     AlbumService albumService;
 
-
-
     @GetMapping("/albumList")
     public String albumList(@RequestParam(value="id") Integer singerId,
                             @RequestParam(value="currentPage")  Integer currentPage,

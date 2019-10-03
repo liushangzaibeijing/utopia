@@ -24,6 +24,14 @@ public class SongPlayInfo {
      * 歌词转码后的歌词
      */
     private String lyric;
+    /**
+     * 歌手图片
+     */
+    private String singerUrl;
+    /**
+     * 歌曲所属专辑url
+     */
+    private String albumUrl;
 
     public Integer getId() {
         return id;
@@ -63,5 +71,21 @@ public class SongPlayInfo {
 
     public void setLyric(String lyric) {
         this.lyric = lyric;
+    }
+
+    public void setAlbumUrl(String albumUrl) {
+        this.albumUrl = albumUrl;
+    }
+
+    public void setSingerUrl(String singerUrl) {
+        this.singerUrl = singerUrl;
+    }
+
+    public String getSingerUrl() {
+        return singerUrl;
+    }
+
+    public String getAlbumUrl() {
+        return albumUrl;
     }
 }
