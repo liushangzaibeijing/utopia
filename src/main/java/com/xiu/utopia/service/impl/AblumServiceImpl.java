@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiu.utopia.dao.BusAlbumMapper;
 import com.xiu.utopia.dao.SingerMapper;
-import com.xiu.utopia.dao.SongMapper;
 import com.xiu.utopia.entity.Album;
 import com.xiu.utopia.entity.AlbumExample;
 import com.xiu.utopia.entity.Singer;
@@ -16,12 +15,6 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class AblumServiceImpl implements AlbumService {
-
-    /**
-     * 歌曲信息持久化类
-     */
-    @Autowired
-    SongMapper songMapper;
 
     /**
      * 歌手信息持久化类

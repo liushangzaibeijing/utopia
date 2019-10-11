@@ -3,6 +3,7 @@ package com.xiu.utopia.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.xiu.utopia.common.enums.DeleteType;
 import com.xiu.utopia.dao.AlbumMapper;
 import com.xiu.utopia.dao.BusSongMapper;
 import com.xiu.utopia.dao.SingerMapper;
@@ -41,7 +42,7 @@ public class SongServiceImpl implements SongService {
     public Page<Song> querySongList(Integer singerId, String albumMid, Integer currentPage, Integer pageSize) {
         SongExample songExample = new SongExample();
         SongExample.Criteria criteria = songExample.createCriteria();
-
+        criteria.andIsDeleteEqualTo(DeleteType.NO_DELETE.getCode());
         if(!StringUtils.isEmpty(albumMid)){
             criteria.andAlbumIdEqualTo(albumMid);
         }else{

@@ -1,72 +1,31 @@
 package com.xiu.utopia.entity;
 
-/**
- * 
- * 
- * @author wcyong
- * 
- * @date 2019-09-15
- */
 public class Song {
-    /**
-     * 主键
-     */
     private Integer id;
 
-    /**
-     * qq音乐id
-     */
     private Integer songId;
 
-    /**
-     * qq音乐mid
-     */
     private String songMid;
 
-    /**
-     * 歌曲名称
-     */
     private String songName;
 
-    /**
-     * 歌曲类型
-     */
     private String songType;
 
-    /**
-     * 所属专辑
-     */
     private String albumId;
 
-    /**
-     * 所属歌手
-     */
     private String singerMid;
 
-    /**
-     * 发行时间
-     */
     private String timePublic;
 
-    /**
-     * 歌曲属性
-     */
     private String songAttr;
 
-    /**
-     * 歌曲时长
-     */
     private String duration;
 
-    /**
-     * 歌词信息
-     */
-    private String lyric;
-
-    /**
-     * 歌曲路径
-     */
     private String songUrl;
+
+    private Integer isDelete;
+
+    private String lyric;
 
     public Integer getId() {
         return id;
@@ -148,19 +107,27 @@ public class Song {
         this.duration = duration == null ? null : duration.trim();
     }
 
-    public String getLyric() {
-        return lyric;
-    }
-
-    public void setLyric(String lyric) {
-        this.lyric = lyric == null ? null : lyric.trim();
-    }
-
     public String getSongUrl() {
         return songUrl;
     }
 
     public void setSongUrl(String songUrl) {
         this.songUrl = songUrl == null ? null : songUrl.trim();
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public String getLyric() {
+        return lyric;
+    }
+
+    public void setLyric(String lyric) {
+        this.lyric = lyric == null ? null : lyric.trim();
     }
 }

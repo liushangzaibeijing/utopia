@@ -63,13 +63,6 @@ public class SongExample {
         distinct = false;
     }
 
-    /**
-     * 
-     * 
-     * @author wcyong
-     * 
-     * @date 2019-09-15
-     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -791,76 +784,6 @@ public class SongExample {
             return (Criteria) this;
         }
 
-        public Criteria andLyricIsNull() {
-            addCriterion("lyric is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricIsNotNull() {
-            addCriterion("lyric is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricEqualTo(String value) {
-            addCriterion("lyric =", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricNotEqualTo(String value) {
-            addCriterion("lyric <>", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricGreaterThan(String value) {
-            addCriterion("lyric >", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricGreaterThanOrEqualTo(String value) {
-            addCriterion("lyric >=", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricLessThan(String value) {
-            addCriterion("lyric <", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricLessThanOrEqualTo(String value) {
-            addCriterion("lyric <=", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricLike(String value) {
-            addCriterion("lyric like", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricNotLike(String value) {
-            addCriterion("lyric not like", value, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricIn(List<String> values) {
-            addCriterion("lyric in", values, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricNotIn(List<String> values) {
-            addCriterion("lyric not in", values, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricBetween(String value1, String value2) {
-            addCriterion("lyric between", value1, value2, "lyric");
-            return (Criteria) this;
-        }
-
-        public Criteria andLyricNotBetween(String value1, String value2) {
-            addCriterion("lyric not between", value1, value2, "lyric");
-            return (Criteria) this;
-        }
-
         public Criteria andSongUrlIsNull() {
             addCriterion("song_url is null");
             return (Criteria) this;
@@ -930,6 +853,66 @@ public class SongExample {
             addCriterion("song_url not between", value1, value2, "songUrl");
             return (Criteria) this;
         }
+
+        public Criteria andIsDeleteIsNull() {
+            addCriterion("is_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIsNotNull() {
+            addCriterion("is_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteEqualTo(Integer value) {
+            addCriterion("is_delete =", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotEqualTo(Integer value) {
+            addCriterion("is_delete <>", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThan(Integer value) {
+            addCriterion("is_delete >", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_delete >=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThan(Integer value) {
+            addCriterion("is_delete <", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThanOrEqualTo(Integer value) {
+            addCriterion("is_delete <=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIn(List<Integer> values) {
+            addCriterion("is_delete in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotIn(List<Integer> values) {
+            addCriterion("is_delete not in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteBetween(Integer value1, Integer value2) {
+            addCriterion("is_delete between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_delete not between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -939,13 +922,6 @@ public class SongExample {
         }
     }
 
-    /**
-     * 
-     * 
-     * @author wcyong
-     * 
-     * @date 2019-09-15
-     */
     public static class Criterion {
         private String condition;
 
