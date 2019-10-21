@@ -1,6 +1,7 @@
 package com.xiu.utopia.web;
 
 import com.github.pagehelper.Page;
+import com.xiu.utopia.annonation.Cache;
 import com.xiu.utopia.entity.Song;
 import com.xiu.utopia.service.SongService;
 import com.xiu.utopia.utils.JsonUtil;
@@ -31,6 +32,7 @@ public class SongController extends BaseController {
      * @return
      */
     @GetMapping("/songList")
+    @Cache(keyGenerator = "param")
     public String songList(@RequestParam(value="id") Integer singerId,
                            @RequestParam(value="albumMid",required = false)  String albumMid,
                            @RequestParam(value="currentPage")  Integer currentPage,
@@ -51,6 +53,7 @@ public class SongController extends BaseController {
      * @return
      */
     @GetMapping("/getSongPlayInfo")
+    @Cache(keyGenerator = "param")
     public String getSongPlayInfo(@RequestParam(value="id") Integer songId){
         logger.info("查询歌手歌曲播放信息信息开始");
 

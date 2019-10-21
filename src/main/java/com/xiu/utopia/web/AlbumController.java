@@ -1,6 +1,7 @@
 package com.xiu.utopia.web;
 
 import com.github.pagehelper.Page;
+import com.xiu.utopia.annonation.Cache;
 import com.xiu.utopia.entity.Album;
 import com.xiu.utopia.service.AlbumService;
 import com.xiu.utopia.utils.JsonUtil;
@@ -22,6 +23,7 @@ public class AlbumController extends BaseController {
     AlbumService albumService;
 
     @GetMapping("/albumList")
+    @Cache(keyGenerator = "param")
     public String albumList(@RequestParam(value="id") Integer singerId,
                             @RequestParam(value="currentPage")  Integer currentPage,
                             @RequestParam(value="pageSize")  Integer pageSize){
