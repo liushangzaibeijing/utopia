@@ -1,13 +1,16 @@
 package com.xiu.utopia.utils;
 
 import com.alibaba.fastjson.JSONArray;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,5 +52,10 @@ public class JsonUtil {
             log.error("json 转换错误",e);
         }
         return null;
+    }
+
+    public static <T> T JsonToBean(String jsonStr, Class<T> objClass)
+            throws JsonParseException, JsonMappingException, IOException {
+        return mapper.readValue(jsonStr, objClass);
     }
 }

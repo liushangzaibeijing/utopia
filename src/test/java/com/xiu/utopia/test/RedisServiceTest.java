@@ -18,8 +18,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * author  Administrator
@@ -37,7 +40,14 @@ public class RedisServiceTest {
   @Test
   public  void  redisString(){
       RedisUtil.setKey("name","谢奇秀",50L, TimeUnit.SECONDS);
-
+      CopyOnWriteArrayList o  = new CopyOnWriteArrayList();
+      o.add(new String("222"));
+      o.get(0);
+      ReentrantReadWriteLock o1 = new ReentrantReadWriteLock();
+      o1.readLock().lock();
+      o1.writeLock();
+      HashMap map = new HashMap();
+      map.put("ss","ee");
       RedisUtil.setNX("name","张安",50L,TimeUnit.SECONDS);
   }
 

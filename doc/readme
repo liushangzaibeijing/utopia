@@ -3,3 +3,8 @@
     tag
 
     id name code  desc parentId type
+
+
+2、用户表
+   主键  登录名 登录密码 用户名 别名 第三方id 邮箱 手机号 所属第三方
+     id loginName,loginPwd
